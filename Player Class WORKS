@@ -9,7 +9,7 @@ MAIN.CPP
 #include "SDL_Plotter.h"
 #include "Player.h"
 #include "floor.h"
-#include "actualFloor.h";
+#include "actualFloor.h"
 using namespace std;
 
 
