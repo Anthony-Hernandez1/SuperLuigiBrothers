@@ -24,6 +24,7 @@ int main(int argc, char ** argv)
     Player luigi;
     Floor f;
     Enemy turtle;
+    Token t1;
 
     //draw sprite
    /* Sprite brickFloor("brickFloor.txt",input);
@@ -79,6 +80,7 @@ int main(int argc, char ** argv)
         }
         if(g.kbhit()){
             turtle.move(1,1);
+             t1.move(10,10);
         }
         if(g.kbhit()){
             g.getKey();
@@ -87,6 +89,7 @@ int main(int argc, char ** argv)
         mario.draw(g);
         luigi.draw(g);
         turtle.drawEnemy(g);
+        t1.draw1(g);
 
 /****************************
 *       platforms     *
