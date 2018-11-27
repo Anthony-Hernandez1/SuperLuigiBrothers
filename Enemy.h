@@ -2,21 +2,24 @@
 // Created by ADAMIK on 11/19/2018.
 //
 
-#ifndef GROUP_PROJECT_ENEMY_H
-#define GROUP_PROJECT_ENEMY_H
+#ifndef ENEMY_H
+#define ENEMY_H
 #include <iostream>
 #include <algorithm>
 #include "SDL_Plotter.h"
-
+#include "Player.h"
+#include "Collisions.h"
 class Enemy {
 private:
+
     int width = 74;
     int height = 22;
-    int posX = 100;
-    int posY = 100;
     int velX = 0;
     int vely = 0;
-
+    //int hp;
+    int posX = 100;
+    int posY = 100;
+    int hp;
 public:
     void move(int xOffset, int yOffset)   // allows you to move
     {
@@ -35,8 +38,50 @@ public:
             }
         }
     }
+// mutators
+    void setHealth(int h)
+    {
+        hp = h;
+    }
+
+    void setPosX(int x)
+    {
+        posX = x;
+    }
+
+    void setPosY(int y)
+    {
+        posY = y;
+    }
+// accessors
+    int getHealth()
+    {
+        return hp;
+    }
+
+    int getPosX()
+    {
+        return posX;
+    }
+
+    int getPosY()
+    {
+        return posY;
+    }
+// destroy
+    void die()
+    {
+       // if(Collision(Enemy e,Player p))
+        //{
+         //   ~Enemy;
+        //}
+    }
+
+
+
+
+
 
 };
+#endif //ENEMY_H
 
-
-#endif //GROUP_PROJECT_ENEMY_H
