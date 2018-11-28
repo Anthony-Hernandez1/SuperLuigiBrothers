@@ -10,8 +10,7 @@
 #include "Player.h"
 #include "floor.h"
 #include "Enemy.h"
-#include "Pipe.h"
-#include "background.h"
+#include "Score.h"
 #include "Token.h"
 using namespace std;
 bool collision(Player, Enemy);
@@ -21,6 +20,7 @@ int main(int argc, char ** argv)
     const int windowHeight = 600;
     const int windowWidth = 1000;
     SDL_Plotter g(windowHeight,windowWidth);   // makes width and height of play window
+    Score score1;
     Player mario;
     Player luigi;
     Floor plat1,    //bottom left
@@ -35,15 +35,11 @@ int main(int argc, char ** argv)
          rightPipe2;    // bottom right
     Enemy turtle;
     Token token;
-    int count = 0;
+    int startTimer;
 // player initialized
-    Background background;  // initialize background
-
-
-    g.initSound("music.wav");       // initialize sound
-
+//    Background background;  // initialize background
+    g.initSound("music.wav");
     g.playSound("music.wav");
-
     bool stopped = false;
     int jumpPosition = 0;
 
@@ -51,6 +47,7 @@ int main(int argc, char ** argv)
     //background.drawBackground(g); //Draw the background
     while (!g.getQuit())
     {
+
         // draw background
          for (int col = 0; col < windowWidth; ++col)
         {
@@ -65,7 +62,6 @@ int main(int argc, char ** argv)
         if(g.getKey() == DOWN_ARROW)    // allows you to move
         {
             mario.movePlayer(0,1);   // moves character down 1 (y access positive)
-
         }
         else if (g.getKey() == UP_ARROW)
         {
@@ -76,6 +72,7 @@ int main(int argc, char ** argv)
         else if (g.getKey() == RIGHT_ARROW)
         {
             mario.movePlayer(1,0);
+            score1.changeScore();
 
         }
         else if (g.getKey() == LEFT_ARROW)
@@ -99,20 +96,25 @@ int main(int argc, char ** argv)
         {
             luigi.movePlayer(-2,0);
         }
+
         turtle.move(1,0);
-        if (turtle.posX == 1000)
+        if (turtle.posX == 800)
         {
             turtle.move(-1,0);
         }
+
         if(g.kbhit()){
             g.getKey();
         }
         g.clear();
+    //drawing
         mario.draw(g);
         luigi.draw(g);
         turtle.drawEnemy(g);
+// move token
         token.draw1(g);
         token.move(1,1);
+        cout << score1.getScore();
 
   //  if(isCollision(turtle,mario))
     //   {
