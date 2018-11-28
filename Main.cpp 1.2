@@ -10,7 +10,7 @@
 #include "Player.h"
 #include "floor.h"
 #include "Enemy.h"
-#include "background.h"
+
 //#include "Sprite.h"
 #include "Collisions.h"
 //#include "Score.h"
@@ -32,7 +32,7 @@ int main(int argc, char ** argv)
     Enemy turtle;
     int count = 0;
 // player initialized
-    Background background;  // initialize background
+   
 
 
     g.initSound("music.wav");       // initialize sound
@@ -42,19 +42,8 @@ int main(int argc, char ** argv)
     bool stopped = false;
     int jumpPosition = 0;
 
-    //background.setBackground("logo.txt"); //The background's dimensions and RGB values are stored in background.txt
-    //background.drawBackground(g); //Draw the background
-    while (!g.getQuit())
-    {
-        // draw background
-         for (int col = 0; col < windowWidth; ++col)
-        {
-            for (int row = 0; row < windowHeight; row++)
-            {
-                g.plotPixel(col,row, 255,0,00);
-            }
-        }
-       // background.drawBackground(g);
+   
+      
 
         //input
         if(g.getKey() == DOWN_ARROW)    // allows you to move
