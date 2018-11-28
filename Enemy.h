@@ -68,6 +68,17 @@ public:
     {
         return posY;
     }
+    
+    int getWidth()
+    {
+        return width;
+    }
+    
+    int getHeight()
+    {
+        return height;
+    }
+    
 // destroy
     void die()
     {
