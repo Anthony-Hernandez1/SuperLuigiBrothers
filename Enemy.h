@@ -10,17 +10,17 @@
 #include "Player.h"
 #include "Collisions.h"
 class Enemy {
-private:
+public:
 
     int width = 74;
     int height = 22;
     int velX = 0;
     int vely = 0;
     //int hp;
-    int posX = 100;
-    int posY = 100;
+    int posX = 40;
+    int posY = 530;
     int hp;
-public:
+
     void move(int xOffset, int yOffset)   // allows you to move
     {
         posX = min(max(posX + xOffset, 0), windowWidth - width);
