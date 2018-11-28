@@ -1,5 +1,17 @@
-if((mario.getPosX() > 330 && mario.getPosX() < 610)&&(mario.getPosY() > 300 && mario.getPosY() < 325))
+if((mario.getPosX() > 254&&mario.getPosX()<603)&&(mario.getPosY() > 280 && mario.getPosY() < 325))
         {
-         mario.setPosX(200);
-         mario.setPosY(200);
+         mario.setPosX(254);
+        }
+    if((mario.getPosX() < 610&&mario.getPosX()>255)&&(mario.getPosY() > 280 && mario.getPosY() < 325))
+        {
+         mario.setPosX(610);
+
+        }
+    if((mario.getPosX() > 255 && mario.getPosX() < 610)&&(mario.getPosY() < 327&&mario.getPosY() >278 ))
+        {
+         mario.setPosY(326);
+        }
+    if((mario.getPosX() > 255 && mario.getPosX() < 610)&&(mario.getPosY() > 277&&mario.getPosY() < 326))
+        {
+         mario.setPosY(277);
         }
