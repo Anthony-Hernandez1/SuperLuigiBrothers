@@ -1,0 +1,5 @@
+if((mario.getPosX() > 330 && mario.getPosX() < 610)&&(mario.getPosY() > 300 && mario.getPosY() < 325))
+        {
+         mario.setPosX(200);
+         mario.setPosY(200);
+        }
