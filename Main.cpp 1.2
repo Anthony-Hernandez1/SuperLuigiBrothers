@@ -10,12 +10,11 @@
 #include "Player.h"
 #include "floor.h"
 #include "Enemy.h"
-
-//#include "Sprite.h"
-#include "Collisions.h"
-//#include "Score.h"
+#include "Pipe.h"
+#include "background.h"
+#include "Token.h"
 using namespace std;
-
+bool collision(Player, Enemy);
 int main(int argc, char ** argv)
 {
     ifstream input;
@@ -28,11 +27,17 @@ int main(int argc, char ** argv)
           plat2,    // bottom right
           plat3,    // top left
           plat4,    // top right platform
-          f;
+          middlePlat,
+          f,
+         leftPipe1, //top left
+         rightPipe1,    // top right
+         leftPipe2, // bottom left
+         rightPipe2;    // bottom right
     Enemy turtle;
+    Token token;
     int count = 0;
 // player initialized
-   
+    Background background;  // initialize background
 
 
     g.initSound("music.wav");       // initialize sound
@@ -42,8 +47,19 @@ int main(int argc, char ** argv)
     bool stopped = false;
     int jumpPosition = 0;
 
-   
-      
+    //background.setBackground("logo.txt"); //The background's dimensions and RGB values are stored in background.txt
+    //background.drawBackground(g); //Draw the background
+    while (!g.getQuit())
+    {
+        // draw background
+         for (int col = 0; col < windowWidth; ++col)
+        {
+            for (int row = 0; row < windowHeight; row++)
+            {
+                g.plotPixel(col,row, 255,0,00);
+            }
+        }
+       // background.drawBackground(g);
 
         //input
         if(g.getKey() == DOWN_ARROW)    // allows you to move
@@ -84,12 +100,20 @@ int main(int argc, char ** argv)
             luigi.movePlayer(-2,0);
         }
         turtle.move(1,0);
-
-
+        if (turtle.posX == 1000)
+        {
+            turtle.move(-1,0);
+        }
+        if(g.kbhit()){
+            g.getKey();
+        }
         g.clear();
         mario.draw(g);
         luigi.draw(g);
         turtle.drawEnemy(g);
+        token.draw1(g);
+        token.move(1,1);
+
   //  if(isCollision(turtle,mario))
     //   {
       //     turtle.hp-=1;
@@ -100,34 +124,54 @@ int main(int argc, char ** argv)
 
 //platform1
         int pX = 0;
-        int pY = 300;
-        plat1.setWidth(400);    // bottom left platform
-        plat1.setHeight(40);
+        int pY = 400;
+        plat1.setWidth(370);    // bottom left platform
+        plat1.setHeight(30);
         plat1.draw(g,pX,pY);
 
-        plat2.setWidth(450);    // bottom right platform
-        plat2.setHeight(40);
+        plat2.setWidth(400);    // bottom right platform
+        plat2.setHeight(30);
         pX = 600;
-        pY = 300;
+        pY = 400;
         plat2.draw(g,pX,pY);
 
-        plat3.setWidth(400);    // top left platform
-        plat3.setHeight(40);
+        plat3.setWidth(370);    // top left platform
+        plat3.setHeight(30);
         pX = 0;
         pY = 150;
         plat3.draw(g,pX,pY);
 
-        plat4.setWidth(450);    // top right
-        plat4.setHeight(40);
+        plat4.setWidth(400);    // top right
+        plat4.setHeight(30);
         pX = 600;
         pY = 150;
         plat4.draw(g,pX,pY);
 
+        middlePlat.setWidth(280);    // middle
+        middlePlat.setHeight(25);
+        pX = 330;
+        pY = 300;
+        middlePlat.draw(g,pX,pY);
+
         pX = 0;
         pY = 560;
         f.drawFloor(g,pX,pY);
+
+/*********************
+*   Pipes           *
+*********************/
+        leftPipe1.setWidth(70);    // top left
+        leftPipe1.setHeight(25);
+        pX = 0;
+        pY = 530;
+        leftPipe1.drawPipe(g,pX,pY);
+
+        leftPipe2.setWidth(70);    // bottom right
+        leftPipe2.setHeight(25);
+        pX = 940;
+        pY = 530;
+        leftPipe2.drawPipe(g,pX,pY);
         g.update();
-
-
     }
 }
+
