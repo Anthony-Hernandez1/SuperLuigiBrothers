@@ -75,6 +75,16 @@ public:
     {
         return posY;
     }
+    
+    int getWidth()
+    {
+        return width;
+    }
+    
+    int getHeight()
+    {
+        return height;
+    }
 
     void jump()
     {
