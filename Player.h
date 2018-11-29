@@ -25,6 +25,9 @@ private:
 
 
 public:
+    int row = 50;
+    int col = 50;
+    
     SDL_Rect positionRect;
 
 // what object does
@@ -92,14 +95,11 @@ public:
     }
     Color player[50][50];
     
-    void createPlayer(string a)
+    void createPlayer()
     {
         ifstream pFile;
         
         pFile.open("Mario.txt");
-        
-        row = 50;
-        col = 50;
         
         for(int r = 0; r < row; r++)
         {
