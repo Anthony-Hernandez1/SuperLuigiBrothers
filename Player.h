@@ -90,6 +90,7 @@ public:
     {
 
     }
+    Color player[50][50];
     
     void createPlayer(string a)
     {
