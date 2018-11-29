@@ -56,6 +56,26 @@ public:
     }
     tFile.close();
 }
+    //updated draw so that it draws from file;
+    /*
+    void draw(SDL_Plotter& g)
+{
+    erase(g);
+    for(int y =0;y < row; y++){
+        for(int x = 0; x < col; x++){
+
+            if(player[y][x].R == 255 && player[y][x].G == 255 && player[y][x].B == 255)
+            {
+                player[y][x].R = background[loc.x+x][loc.y+y].R;
+                player[y][x].G = background[loc.x+x][loc.y+y].G;
+                player[y][x].B = background[loc.x+x][loc.y+y].B;
+            }
+
+            g.plotPixel(loc.x+x,loc.y+y,player[y][x].R, player[y][x].G, player[y][x].B);
+        }
+    }
+}
+*/
 };
 
 
