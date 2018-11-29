@@ -90,6 +90,27 @@ public:
     {
 
     }
+    
+    void createPlayer(string a)
+    {
+        ifstream pFile;
+        
+        pFile.open("Mario.txt");
+        
+        row = 50;
+        col = 50;
+        
+        for(int r = 0; r < row; r++)
+        {
+            for(int c = 0; c < col; c++)
+            {
+                pFile >> player[r][c].R;
+                pFile >> player[r][c].G;
+                pFile >> player[r][c].B;
+            }
+        }
+        pFile.close();
+    }
 
 };
 #endif // SDL_PLOTTER_H_
