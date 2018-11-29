@@ -10,17 +10,36 @@
 #include "Player.h"
 #include "floor.h"
 #include "Enemy.h"
-//#include "Score.h"
+#include "Score.h"
 #include "Token.h"
+#include "Collision.h"
+#include "Level1.h"
 using namespace std;
-bool collision(Player, Enemy);
+const int GRAVITY = -1;
 int main(int argc, char ** argv)
 {
     ifstream input;
     const int windowHeight = 600;
     const int windowWidth = 1000;
     SDL_Plotter g(windowHeight,windowWidth);   // makes width and height of play window
-//    Score score1;
+/*************************
+*     TIMER                 *
+****************************/
+    bool decremented120 = true;
+    bool decremented110 = true;
+    bool decremented100 = true;
+    bool decremented90 = true;
+    bool decremented80 = true;
+    bool decremented70 = true;
+    bool decremented60 = true;
+    bool decremented50 = true;
+    bool decremented40 = true;
+    bool decremented30 = true;
+    bool decremented20 = true;
+    bool decremented10 = true;
+    int startTime;
+    int timer = 120;
+    Score score1;
     Player mario;
     Player luigi;
     Floor plat1,    //bottom left
@@ -32,9 +51,12 @@ int main(int argc, char ** argv)
          leftPipe1, //top left
          rightPipe1,    // top right
          leftPipe2, // bottom left
-         rightPipe2;    // bottom right
+         rightPipe2,    // bottom right
+         plat5;
     Enemy turtle;
     Token token;
+    //collide.collision(turtle, mario);
+   // collide.getCollision();
     int startTimer;
 // player initialized
 //    Background background;  // initialize background
@@ -45,77 +67,82 @@ int main(int argc, char ** argv)
 
     //background.setBackground("logo.txt"); //The background's dimensions and RGB values are stored in background.txt
     //background.drawBackground(g); //Draw the background
-    while (!g.getQuit())
+   while((!g.getQuit() && timer != 0))
     {
-
-        // draw background
-         for (int col = 0; col < windowWidth; ++col)
+        // timer
+       /* startTime = SDL_GetTicks() - 2000; //Start time is more or less 0 milliseconds
+        if(startTime/1000 == 10 && decremented120 == true)
         {
-            for (int row = 0; row < windowHeight; row++)
-            {
-                g.plotPixel(col,row, 255,0,00);
-            }
+            timer = timer - 10;
+            cout << timer << endl;
+            decremented120 = false;
         }
-       // background.drawBackground(g);
-
-        //input
-        if(g.getKey() == DOWN_ARROW)    // allows you to move
+        if(startTime/1000 == 20 && decremented110 == true)
         {
-            mario.movePlayer(0,1);   // moves character down 1 (y access positive)
+            timer = timer - 10;
+            cout << timer << endl;
+            decremented110 = false;
         }
-        else if (g.getKey() == UP_ARROW)
+        if(startTime/1000 == 30 && decremented100 == true)
         {
-            mario.movePlayer(0,-1);
-            g.initSound("jumps.wav");
-            g.playSound("jumps.wav");
+            timer = timer - 10;
+            cout << timer << endl;
+            decremented100 = false;
         }
-        else if (g.getKey() == RIGHT_ARROW)
+        if(startTime/1000 == 40 && decremented90 == true)
         {
-            mario.movePlayer(1,0);
-//            score1.changeScore();
-
+            timer = timer - 10;
+            cout << timer << endl;
+            decremented90 = false;
         }
-        else if (g.getKey() == LEFT_ARROW)
+        if(startTime/1000 == 50 && decremented80 == true)
         {
-            mario.movePlayer(-1,0);
+            timer = timer - 10;
+            cout << timer << endl;
+            decremented80 = false;
         }
-
-        if(g.getKey() == 'S')    // allows you to move
+        if(startTime/1000 == 60 && decremented70 == true)
         {
-            luigi.movePlayer(0,2);   // moves character down 1 (y access positive)
+            timer = timer - 10;
+            cout << timer << endl;
+            decremented70 = false;
         }
-        else if (g.getKey() == 'W')
+        if(startTime/1000 == 70 && decremented60 == true)
         {
-            luigi.movePlayer(0,-2);
+            timer = timer - 10;
+            cout << timer << endl;
+            decremented60 = false;
         }
-        else if (g.getKey() == 'D')
+        if(startTime/1000 == 80 && decremented50 == true)
         {
-            luigi.movePlayer(2,0);
+            timer = timer - 10;
+            cout << timer << endl;
+            decremented50 = false;
         }
-        else if (g.getKey() == 'A')
+        if(startTime/1000 == 90 && decremented40 == true)
         {
-            luigi.movePlayer(-2,0);
+            timer = timer - 10;
+            cout << timer << endl;
+            decremented40 = false;
         }
-
-        turtle.move(1,0);
-        if (turtle.posX == 800)
+        if(startTime/1000 == 100 && decremented30 == true)
         {
-            turtle.move(-1,0);
+            timer = timer - 10;
+            cout << timer << endl;
+            decremented30 = false;
         }
-
-        if(g.kbhit()){
-            g.getKey();
+        if(startTime/1000 == 110 && decremented20 == true)
+        {
+            timer = timer - 10;
+            cout << timer << endl;
+            decremented20 = false;
         }
-        g.clear();
-    //drawing
-        mario.draw(g);
-        luigi.draw(g);
-        turtle.drawEnemy(g);
-// move token
-        token.draw1(g);
-        token.move(1,1);
-//        cout << score1.getScore();
-if((mario.getPosX() > 254&&mario.getPosX()<603)&&(mario.getPosY() > 280 && mario.getPosY() < 325))
+        if(startTime/1000 == 120 && decremented10 == true)
+        {
+            timer = timer - 10;
+            cout << timer << endl;
+            decremented10 = false;*/
+        if((mario.getPosX() > 254&&mario.getPosX()<603)&&(mario.getPosY() > 280 && mario.getPosY() < 325))
         {
          mario.setPosX(254);
         }
@@ -133,64 +160,150 @@ if((mario.getPosX() > 254&&mario.getPosX()<603)&&(mario.getPosY() > 280 && mario
          mario.setPosY(277);
 }
 
+        // draw background
+         for (int col = 0; col < windowWidth; ++col)
+        {
+            for (int row = 0; row < windowHeight; row++)
+            {
+                g.plotPixel(col,row, 255,0,00);
+            }
+        }
+
+        //input
+        while(mario.hp == 1){
+            mario.falling();
+        }
+
+        mario.gravity(-1);      // GRAVITY FOR PLAYER1
+        luigi.gravity(-1);      // GRAVITY FOR PLAYER2
+        if (g.getKey() == UP_ARROW)
+        {
+            mario.movePlayer(0,-50);
+            g.initSound("jumps.wav");
+            g.playSound("jumps.wav");
+        }
+        else if (g.getKey() == RIGHT_ARROW)
+        {
+            mario.moveRight(1);
+            //score1.changeScore();
+
+        }
+        else if (g.getKey() == LEFT_ARROW)
+        {
+            mario.moveLeft(-1,0);
+        }
+//LUIGI
+        else if(g.getKey() == 'W') // allows you to move
+        {
+            luigi.movePlayer(0,-50);
+            g.initSound("jumps.wav");
+            g.playSound("jumps.wav");
+        }
+        else if (g.getKey() == 'D')
+        {
+            luigi.moveRight(1);
+        }
+        else if (g.getKey() == 'A')
+        {
+            luigi.moveLeft(-1,0);
+        }
+        else if (g.kbhit()){
+            mario.falling();
+        }
+       /* else if (g.getKey() == 'R')
+        {
+            plat5.setWidth(370);
+            plat5.setHeight(30);
+            plat5.erase(g,0,400);
+        }*/
+
+
+        turtle.move(1,0);
+        if (turtle.posX == 800)
+        {
+            turtle.move(-1,0);
+        }
+
+        if(g.kbhit()){
+            g.getKey();
+        }
+        g.clear();
+    //drawing
+        mario.draw(g);
+        luigi.draw(g);
+        turtle.drawEnemy(g);
+//        collide.displayCollision();
+// move token
+        token.draw1(g);
+        token.move(1,1);
+       // cout << score1.getScore();
 
   //  if(isCollision(turtle,mario))
     //   {
       //     turtle.hp-=1;
        //}
+      /* while(mario.getPosX()== plat1.draw(g,0,400) || mario.getPosY() == plat1.draw(g,0,400)){
+        mario.movePlayer(0,0);
+       }*/
 /****************************
 *       platforms     *
 ****************************/
 
 //platform1
-        int pX = 0;
-        int pY = 400;
         plat1.setWidth(370);    // bottom left platform
         plat1.setHeight(30);
-        plat1.draw(g,pX,pY);
+        plat1.draw(g,0,400);
+        while(mario.getPosX()== plat1.getHeight() && mario.getPosY() == plat1.getWidth()){
+        mario.setPosX(!0);
+        mario.setPosY(!400);
+    }
 
         plat2.setWidth(400);    // bottom right platform
         plat2.setHeight(30);
-        pX = 600;
-        pY = 400;
-        plat2.draw(g,pX,pY);
+        plat2.draw(g,600,400);
 
         plat3.setWidth(370);    // top left platform
         plat3.setHeight(30);
-        pX = 0;
-        pY = 150;
-        plat3.draw(g,pX,pY);
+        plat3.draw(g,0,150);
 
         plat4.setWidth(400);    // top right
         plat4.setHeight(30);
-        pX = 600;
-        pY = 150;
-        plat4.draw(g,pX,pY);
+        plat4.draw(g,600,150);
 
         middlePlat.setWidth(280);    // middle
         middlePlat.setHeight(25);
-        pX = 330;
-        pY = 300;
-        middlePlat.draw(g,pX,pY);
+        middlePlat.draw(g,330,300);
 
-        pX = 0;
-        pY = 560;
-        f.drawFloor(g,pX,pY);
+        f.drawFloor(g,0,560);
 
 /*********************
 *   Pipes           *
 *********************/
         leftPipe1.setWidth(70);    // top left
         leftPipe1.setHeight(25);
-        pX = 0;
-        pY = 530;
-        leftPipe1.draw(g,pX,pY);
+        leftPipe1.drawPipe(g,0,530);
 
         leftPipe2.setWidth(70);    // bottom right
         leftPipe2.setHeight(25);
-        pX = 940;
-        pY = 530;
-        leftPipe2.draw(g,pX,pY);
-        g.update();
+        leftPipe2.drawPipe(g,940,530);
+
+/***********************************
+            LEVEL 2                 *
+*************************************/
+
+   /* while (score1.getScore() >= 988)
+        {
+            plat1.erase(g,0,400);
+            plat2.erase(g,600,400);
+            plat3.erase(g,0,150);
+            plat4.erase(g,600,150);
+            middlePlat.erase(g,330,300);
+            f.erase(g,0,400);
+            //redraw for second level
+
+        }*/
+    g.update();
     }
 }
+
+
