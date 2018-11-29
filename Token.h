@@ -38,6 +38,24 @@ public:
             }
         }
     }
+    //reads from file and sets it in array
+    void createToken()
+    {
+    ifstream tFile;
+    tFile.open("Token.txt");
+    row = 50;
+    col = 50;
+    for(int r = 0; r < row; r++)
+    {
+        for(int c = 0; c < col; c++)
+        {
+            tFile >> token[r][c].R;
+            tFile >> token[r][c].G;
+            tFile >> token[r][c].B;
+        }
+    }
+    tFile.close();
+}
 };
 
 
