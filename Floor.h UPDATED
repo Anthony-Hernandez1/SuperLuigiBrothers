@@ -1,92 +1,247 @@
-#ifndef FLOOR_H
-#define FLOOR_H
+/***********************************
+*       square with classes         *
+*   does not work as of yet         *
+************************************/
+
 #include <iostream>
-#include <algorithm>
+#include <cmath>
+#include <fstream>
 #include "SDL_Plotter.h"
+#include "Player.h"
+#include "floor.h"
+#include "Enemy.h"
+#include "Score.h"
+#include "Token.h"
+#include "Collision.h"
+#include "Level1.h"
 using namespace std;
-
-
-class Floor
+const int GRAVITY = -1;
+int main(int argc, char ** argv)
 {
-private:
-//platforms
-    int width;
-    int height;
-    int posX;
-    int posY;
-//floor
-    int wFloor = 1000;
-    int hFloor = 40;
+    ifstream input;
+    const int windowHeight = 600;
+    const int windowWidth = 1000;
+    SDL_Plotter g(windowHeight,windowWidth);   // makes width and height of play window
 
-public:
-// what object does
-//platforms
+    Color color;
 
-    Floor()
+    Score score1;
+    Player mario;
+    Player luigi;
+    Floor plat1,    //bottom left
+          plat2,    // bottom right
+          plat3,    // top left
+          plat4,    // top right platform
+          middlePlat,
+          f,
+         leftPipe1, //top left
+         rightPipe1,    // top right
+         leftPipe2, // bottom left
+         rightPipe2,    // bottom right
+         plat5;
+    Enemy turtle,
+          turtle2;
+    Token token;
+    while ((turtle.posY!= windowHeight-turtle.height-40) && (turtle2.posY!= windowHeight - turtle2.height - 40))
     {
-        width = 0;
-        height = 0;
-        posX = 0;
-        posY = 0;
-    }
-//mutators
-    void setWidth(int w)
-    {
-        width = w;
-    }
-    void setHeight(int h)
-    {
-        height = h;
-    }
-    void setFloorWidth(int wF)
-    {
-        wFloor = wF;
-    }
-    void setFloorHeight(int hF)
-    {
-        hFloor = hF;
+        turtle.posY+=1;  //GRAVITY FOR TURTLE
+        turtle2.posY+=1;
     }
 
-//accessors
-    int getWidth()
-    {
-        return width;
-    }
-    int getHeight()
-    {
-        return height;
-    }
-    int getFloorWidth()
-    {
-        return wFloor;
-    }
-    int getFloorHeight()
-    {
-        return hFloor;
-    }
+    int tempScore = 0;
+    //collide.collision(turtle, mario);
+   // collide.getCollision();
 
-
-
-    void draw(SDL_Plotter & g, int posX,int posY)
+// player initialized
+        g.initSound("music.wav");
+        g.playSound("music.wav");
+    while((!g.getQuit()))
     {
-        for (int col = posX; col < width + posX; col++)   // goes through all columns
+        g.initSound("theme.wav");
+        g.playSound("theme.wav");
+        if((mario.getPosX() > 254&&mario.getPosX()<603)&&(mario.getPosY() > 280 && mario.getPosY() < 325))
         {
-            for (int row = posY; row < height + posY; ++row)
-            {
-                g.plotPixel(col,row, 204, 204, 0);
-            }
+         mario.setPosX(254);
         }
-    }
-//floor
-    void drawFloor(SDL_Plotter & g, int posX,int posY)
-    {
-        for (int col = posX; col < wFloor + posX; col++)   // goes through all columns
+        if((mario.getPosX() < 610&&mario.getPosX()>255)&&(mario.getPosY() > 280 && mario.getPosY() < 325))
         {
-            for (int row = posY; row < hFloor + posY; ++row)
-            {
-                g.plotPixel(col,row, 102, 51, 0);
-            }
+         mario.setPosX(610);
+
         }
+        if((mario.getPosX() > 255 && mario.getPosX() < 610)&&(mario.getPosY() < 327&&mario.getPosY() >278 ))
+        {
+         mario.setPosY(326);
+        }
+        if((mario.getPosX() > 255 && mario.getPosX() < 610)&&(mario.getPosY() > 277&&mario.getPosY() < 326))
+        {
+         mario.setPosY(277);
+        }
+
+        mario.gravity(-1);      // GRAVITY FOR PLAYER1
+        luigi.gravity(-1);      // GRAVITY FOR PLAYER2
+    //input
+        while(mario.hp == 1){
+            mario.falling();
+        }
+        tempScore++;
+        cout << tempScore<< endl;
+
+        if (g.getKey() == UP_ARROW)
+        {
+            mario.movePlayer(0,-200);
+            g.initSound("jumps.wav");
+            g.playSound("jumps.wav");
+            tempScore++;
+        }
+        else if (g.getKey() == RIGHT_ARROW)
+        {
+            mario.moveRight(1);
+            //score1.changeScore();
+
+        }
+        else if (g.getKey() == LEFT_ARROW)
+        {
+            mario.moveLeft(-1);
+        }
+//LUIGI
+        else if(g.getKey() == 'W') // allows you to move
+        {
+            luigi.movePlayer(0,-200);
+            g.initSound("jumps.wav");
+            g.playSound("jumps.wav");
+        }
+        else if (g.getKey() == 'D')
+        {
+            luigi.moveRight(1);
+        }
+        else if (g.getKey() == 'A')
+        {
+            luigi.moveLeft(-1);
+        }
+        else if (g.kbhit()){
+            mario.falling();
+        }
+
+        if(g.kbhit()){
+            g.getKey();
+        }
+        g.clear();
+    //drawing
+        mario.draw(g);
+        luigi.draw(g);
+/*******************
+*       Enemy       *
+********************/
+
+        turtle.drawEnemy(g);
+        turtle2.drawEnemy2(g);
+
+/********************
+*    NPC Movement   *
+*********************/
+        token.draw1(g);
+        token.move(1,1);
+
+        turtle.moveRight(1);
+        turtle2.moveRight(1);
+
+      /* while(mario.getPosX()== plat1.draw(g,0,400) || mario.getPosY() == plat1.draw(g,0,400)){
+        mario.movePlayer(0,0);
+       }*/
+/****************************
+*       platforms     *
+****************************/
+//color
+
+//platform1
+        plat1.setWidth(370);    // bottom left platform
+        plat1.setHeight(30);
+        plat1.draw(g,0,400);
+        while(mario.getPosX()== plat1.getHeight() && mario.getPosY() == plat1.getWidth()){
+        mario.setPosX(!0);
+        mario.setPosY(!400);
+        }
+        plat2.setWidth(400);    // bottom right platform
+        plat2.setHeight(30);
+        plat2.draw(g,600,400);
+
+        plat3.setWidth(370);    // top left platform
+        plat3.setHeight(30);
+        plat3.draw(g,0,150);
+
+        plat4.setWidth(400);    // top right
+        plat4.setHeight(30);
+        plat4.draw(g,600,150);
+
+        middlePlat.setWidth(280);    // middle
+        middlePlat.setHeight(25);
+        middlePlat.draw(g,330,300);
+
+        f.drawFloor(g,0,560);
+
+/*********************
+*   Pipes           *
+*********************/
+        leftPipe1.setWidth(70);    // bottom left
+        leftPipe1.setHeight(25);
+        leftPipe1.drawPipe(g,0,530);
+
+        leftPipe2.setWidth(70);    // bottom right
+        leftPipe2.setHeight(25);
+        leftPipe2.drawPipe(g,940,530);
+
+/***********************************
+            LEVEL 2                 *
+*************************************/
+    if(tempScore >= 2000)
+    {
+    //redraw for second level
+        plat1.drawLevel2(g,0,400);
+        plat2.drawLevel2(g,600,400);
+        plat3.drawLevel2(g,0,150);
+        plat4.drawLevel2(g,600,150);
+        middlePlat.drawLevel2(g,330,300);
     }
-};
-#endif // SDL_PLOTTER_H_
+/****************************************
+*           LEVEL 3                     *
+*****************************************/
+    if (tempScore >= 3000)
+    {
+        plat1.drawLevel3(g,0,400);
+        plat2.drawLevel3(g,600,400);
+        plat3.drawLevel3(g,0,150);
+        plat4.drawLevel3(g,600,150);
+        middlePlat.drawLevel3(g,330,300);
+    }
+
+/******************************************
+*               LEVEL 4                   *
+*******************************************/
+
+    if (tempScore >= 4000)
+    {
+        plat1.drawLevel4(g,0,400);
+        plat2.drawLevel4(g,600,400);
+        plat3.drawLevel4(g,0,150);
+        plat4.drawLevel4(g,600,150);
+        middlePlat.drawLevel4(g,330,300);
+    }
+
+/******************************************
+*               LEVEL 5                   *
+*******************************************/
+
+    if (tempScore >= 5000)
+    {
+        plat1.drawLevel5(g,0,400);
+        plat2.drawLevel5(g,600,400);
+        plat3.drawLevel5(g,0,150);
+        plat4.drawLevel5(g,600,150);
+        middlePlat.drawLevel5(g,330,300);
+    }
+
+
+    g.update();
+    }
+}
+
