@@ -1,0 +1,160 @@
+//
+// Created by ADAMIK on 11/19/2018.
+//
+
+#ifndef ENEMY_H
+#define ENEMY_H
+#include <iostream>
+#include <algorithm>
+#include "SDL_Plotter.h"
+#include "Player.h"
+#include "Collisions.h"
+class Enemy {
+public:
+
+    int width;
+    int height;
+    int velX;
+    int velY;
+    //int hp;
+    int posX;
+    int posY;
+    int hp;
+    int posY2,
+        posX2;
+
+    Enemy()
+    {
+         width = 74;
+        height = 22;
+        velX = 0;
+        velY = 0;
+        posX2 = 460;
+        posY2 = 200;
+        posX = 40;
+        posY = 530;
+        hp = 1;
+    }
+
+    void move(int xOffset, int yOffset)   // allows you to move
+    {
+        posY = min(max(posY + yOffset, 0), windowHeight - height-40);
+        velX = posX -5;
+        velY = posY +5;
+    }
+
+    void moveLeft(int xOffset)
+    {
+        posX-=1;
+    }
+
+    void moveRight(int xOffset)
+    {
+        posX+=1;
+    }
+
+    void gravity(int yOffset)
+    {
+        while (posY!= windowHeight-height-40){
+        posY+=1;
+        }
+    }
+    void drawEnemy(SDL_Plotter & g)
+    {
+        for (int col = posX; col < width + posX; col++)   // goes through all columns
+        {
+            for (int row = posY; row < height + posY; ++row)
+            {
+                g.plotPixel(col,row, 230,10,204);
+            }
+        }
+    }
+    void drawEnemy2(SDL_Plotter & g)
+    {
+        for (int col = posX2; col < width + posX2; col++)   // goes through all columns
+        {
+            for (int row = posY2; row < height + posY2; ++row)
+            {
+                g.plotPixel(col,row, 255, 153, 204);
+            }
+        }
+    }
+/***********************************
+            void move2
+* description: movement for enemy2 *
+*
+*
+*************************************/
+    void move2(int xOffset, int yOffset)   // allows you to move
+    {
+        posY2 = min(max(posY2 + yOffset, 0), windowHeight - height-40);
+    }
+
+    void moveLeft2(int xOffset)
+    {
+        posX2-=1;
+    }
+
+    void moveRight2(int xOffset)
+    {
+        posX2+=1;
+    }
+    void gravity2(int yOffset)
+    {
+        while (posY2!= windowHeight-height-40){
+        posY2+=1;
+        }
+    }
+// mutators
+    void setHealth(int h)
+    {
+        hp = h;
+    }
+
+    void setPosX2(int x)
+    {
+        posX = x;
+    }
+
+    void setPosY2(int y)
+    {
+        posY = y;
+    }
+// accessors
+    int getHealth()
+    {
+        return hp;
+    }
+
+    int getPosX2()
+    {
+        return posX2;
+    }
+
+    int getPosY2()
+    {
+        return posY2;
+    }
+
+    int getWidth()
+    {
+        return width;
+    }
+
+    int getHeight()
+    {
+        return height;
+    }
+
+// destroy
+    void die()
+    {
+       // if(Collision(Enemy e,Player p))
+        //{
+         //   ~Enemy;
+        //}
+    }
+
+
+};
+#endif //ENEMY_H
