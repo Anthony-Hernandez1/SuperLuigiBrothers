@@ -33,8 +33,8 @@ public:
         velY =0;
         width = 74;
         height = 22;
-        posX = 200;
-        posY = 200;
+        posX = 350;
+        posY = 525;
     }
     void movePlayer(int xOffset, int yOffset)   // allows you to move
     {
@@ -42,8 +42,8 @@ public:
         //posY = min(max(posY + yOffset, 0), windowHeight - height);
         //posX = min(max(posX + xOffset, 0), windowWidth - width );
         posY = min(max(posY + yOffset, 0), windowHeight - height - 40);//allows object to move, max height changes to account for the floor
-        velX = posX -5;
-        velY = posY +5;
+        velX = posX -1;
+        velY = posY +1;
     }
 
     void moveLuigi(int xOffset, int yOffset)
@@ -75,7 +75,17 @@ public:
         {
             for (int row = posY; row < height + posY; ++row)
             {
-                g.plotPixel(col,row, 23,10,204);
+                g.plotPixel(col,row, 244,66,66);
+            }
+        }
+    }
+        void draw2(SDL_Plotter & g)
+    {
+        for (int col = posX; col < width + posX; col++)   // goes through all columns
+        {
+            for (int row = posY; row < height + posY; ++row)
+            {
+                g.plotPixel(col,row, 104,244,66);
             }
         }
     }
