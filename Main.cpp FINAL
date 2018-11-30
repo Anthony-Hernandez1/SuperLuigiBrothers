@@ -12,7 +12,7 @@
 #include "Enemy.h"
 #include "Score.h"
 #include "Token.h"
-//#include "Collision.h"
+#include "secretLevel.h"
 #include "Level1.h"
 using namespace std;
 const int GRAVITY = -1;
@@ -22,8 +22,6 @@ int main(int argc, char ** argv)
     const int windowHeight = 600;
     const int windowWidth = 1000;
     SDL_Plotter g(windowHeight,windowWidth);   // makes width and height of play window
-
-    Color color;
 
     Score score1;
 // Player initialization
@@ -46,9 +44,10 @@ int main(int argc, char ** argv)
          plat5;
     Enemy turtle,
           turtle2;
-    Token token;
+    Token token,
+          token2;
 
-    Level1 L,
+    Level1 L,   // initialize to show change of levels
            L2,
            box1,
            box2,
@@ -56,13 +55,9 @@ int main(int argc, char ** argv)
            box4,
            box5,
            box6;
-
-
-//    while ((turtle.posY!= windowHeight-turtle.height-40) && (turtle2.posY!= windowHeight - turtle2.height - 40))
-//    {
-//        turtle.gravity(-1);  //GRAVITY FOR TURTLE
-//        turtle2.gravity2(-1);
-//    }
+    Secret snowflake,
+            snow,
+            hat;
 
     int tempScore = 0;
     //collide.collision(turtle, mario);
@@ -76,7 +71,7 @@ int main(int argc, char ** argv)
         g.initSound("christmas.wav");
     while((!g.getQuit()))
     {
-        if (tempScore < 3000)
+        if (tempScore < 20000)
         {
             g.playSound("theme.wav");
         }
@@ -158,23 +153,6 @@ int main(int argc, char ** argv)
             mario.setPosY(181);
         }
 
-//        if((turtle2.getPosX2() > 254&&turtle2.getPosX2()<603)&&(turtle2.getPosY2() > 280 && turtle.getPosY2() < 325))
-//        {
-//         turtle2.setPosX2(254);
-//        }
-//        if((turtle2.getPosX2() < 610&&turtle2.getPosX2()>255)&&(turtle2.getPosY2() > 280 && turtle2.getPosY2() < 325))
-//        {
-//         turtle2.setPosX2(610);
-//
-//        }
-//        if((turtle2.getPosX2() > 255 && turtle2.getPosX2() < 610)&&(turtle2.getPosY2() < 327&&turtle2.getPosY2() >278 ))
-//        {
-//         turtle2.setPosY2(326);
-//        }
-//        if((turtle2.getPosX2() > 255 && turtle2.getPosX2() < 610)&&(turtle2.getPosY2() > 277&&turtle2.getPosY2() < 326))
-//        {
-//         turtle2.setPosY2(277);
-//        }
 /***************************
 *   "Collision" for Luigi "*
 ****************************/
@@ -347,21 +325,109 @@ int main(int argc, char ** argv)
             token.setPosX(5);
             token.setPosY(5);
         }
+/******************************
+*       Token 2 Collision       *
+**********************************/
+ //Middle Plat
+        if((turtle2.getPosX() > 254 && turtle2.getPosX()<603)&&(turtle2.getPosY() > 280 && turtle2.getPosY() < 325))
+        {
+         turtle2.setPosX(254);
+        }
+        if((token2.getPosX() < 610 && token2.getPosX()>255)&&(token2.getPosY() > 280 && token2.getPosY() < 325))
+        {
+         token2.setPosX(610);
 
-        //mario.gravity(-1);      // GRAVITY FOR PLAYER1
+        }
+        if((token2.getPosX() > 255 && token2.getPosX() < 610)&&(token2.getPosY() < 327&&token2.getPosY() >278 ))
+        {
+         token2.setPosY(326);
+        }
+        if((token2.getPosX() > 255 && token2.getPosX() < 610)&&(token2.getPosY() > 277&&token2.getPosY() < 326))
+        {
+         token2.setPosY(277);
+        }
+
+        //Bottom-Right Plat
+        if((token2.getPosX() > 525)&&(token2.getPosY()>377&&token2.getPosY()<428))
+        {
+            token2.setPosX(525);
+        }
+        if((token2.getPosX() > 525)&&(token2.getPosY()>376&&token2.getPosY()<429))
+        {
+            token2.setPosY(376);
+        }
+        if((token2.getPosX() > 525)&&(token2.getPosY()>376&&token2.getPosY()<430))
+        {
+            token2.setPosY(430);
+        }
+
+        //Bottom Left Plat
+        if((token2.getPosX() < 370)&&(token2.getPosY()>377&&token2.getPosY()<428))
+        {
+            token2.setPosX(370);
+        }
+        if((token2.getPosX() < 370)&&(token2.getPosY()>376&&token2.getPosY()<429))
+        {
+            token2.setPosY(376);
+        }
+        if((token2.getPosX() < 370)&&(token2.getPosY()>376&&token2.getPosY()<430))
+        {
+            token2.setPosY(430);
+        }
+
+        //Top Left Plat
+        if((token2.getPosX() < 370)&&(token2.getPosY()>150&&token2.getPosY()<180))
+        {
+            token2.setPosX(370);
+        }
+        if((token2.getPosX() < 368)&&(token2.getPosY()>127&&token2.getPosY()<180))
+        {
+            token2.setPosY(127);
+        }
+        if((token2.getPosX() < 370)&&(token2.getPosY()>150&&token2.getPosY()<181))
+        {
+            token2.setPosY(181);
+        }
+
+        //Top Right Plat
+        if((token2.getPosX() > 525)&&(token2.getPosY()>150&&token2.getPosY()<180))
+        {
+            token2.setPosX(525);
+        }
+        if((token2.getPosX() > 526)&&(token2.getPosY()>127&&token2.getPosY()<180))
+        {
+            token2.setPosY(127);
+        }
+        if((token2.getPosX() > 526)&&(token2.getPosY()>150&&token2.getPosY()<181))
+        {
+            token2.setPosY(181);
+        }
+        //Token End Movement
+        if(token2.getPosX()>930&&token2.getPosY()<435)
+        {
+            token2.setPosX(0);
+        }
+        if(token2.getPosX()>930&&token2.getPosY()>435)
+        {
+            token2.setPosX(5);
+            token2.setPosY(5);
+        }
+/**********************
+*       input           *
+***********************/
+
+        mario.gravity(-1);      // GRAVITY FOR PLAYER1
         //luigi.gravity(-1);      // GRAVITY FOR PLAYER2
-    //input
-//        while(mario.hp == 1){
-//            mario.falling();
-//        }
+
         tempScore++;
         cout << tempScore<< endl;
 
         if (g.getKey() == UP_ARROW)
         {
-            mario.movePlayer(0,-1);
+            mario.movePlayer(0,-50);
             g.initSound("jumps.wav");
             g.playSound("jumps.wav");
+
         }
         else if (g.getKey() == DOWN_ARROW)
         {
@@ -503,16 +569,12 @@ int main(int argc, char ** argv)
 *********************/
         token.draw1(g);
         token.move(1,1);
-
       //  turtle2.moveLeft2(-1);
 
-      /* while(mario.getPosX()== plat1.draw(g,0,400) || mario.getPosY() == plat1.draw(g,0,400)){
-        mario.movePlayer(0,0);
-       }*/
 /****************************
 *      LEVEL1 platforms     *
 ****************************/
-//color
+//color LEVEL header
         int pX = 300;
         int pY = 10;
         L.draw(g,pX,pY);
@@ -527,7 +589,6 @@ int main(int argc, char ** argv)
         box1.setWidth(10);
         box1.setHeight(60);
         box1.draw(g,pX,pY);
-
 
 //platform1
         plat1.setWidth(370);    // bottom left platform
@@ -594,8 +655,8 @@ int main(int argc, char ** argv)
     if(tempScore >= 10000)
     {
     //redraw for second level
-        g.quitSound("theme.wav");
-        g.playSound("level2theme.wav");
+        token2.draw1(g);
+        token2.move(1,1);
         plat1.drawLevel2(g,0,400);
         plat2.drawLevel2(g,600,400);
         plat3.drawLevel2(g,0,150);
@@ -613,6 +674,8 @@ int main(int argc, char ** argv)
 *****************************************/
     if (tempScore >= 20000)
     {
+        g.quitSound("theme.wav");
+        g.playSound("level2theme.wav");
         plat1.drawLevel3(g,0,400);
         plat2.drawLevel3(g,600,400);
         plat3.drawLevel3(g,0,150);
@@ -667,17 +730,98 @@ int main(int argc, char ** argv)
 /******************************************
 *               SECRET LEVEL              *
 *******************************************/
-    if(tempScore >= 50000)
+    if(g.getKey() == 'C' || tempScore >=55000)
     {
         g.quitSound("level2theme.wav");
         g.quitSound("level5theme.wav");
         g.quitSound("theme.wav");
-        //g.playSound("christmas.wav");
+        g.playSound("christmas.wav");
         plat1.drawLevel6(g,0,400);
         plat2.drawLevel6(g,600,400);
         plat3.drawLevel6(g,0,150);
         plat4.drawLevel6(g,600,150);
         middlePlat.drawLevel6(g,330,300);
+
+    // draw snowflakes
+        snowflake.draw(g,100,30);   // left side
+        snowflake.draw(g,110,110);
+        snowflake.draw(g,60,70);
+        snowflake.draw(g,180,67);
+        snowflake.draw(g,260,70);
+    // right side
+        snowflake.draw(g,600,90);
+        snowflake.draw(g,550,34);
+        snowflake.draw(g,800,110);
+        snowflake.draw(g,880,55);
+        snowflake.draw(g,740,80);
+    // middle
+        snowflake.draw(g,500,200);
+        snowflake.draw(g,390,250);
+        snowflake.draw(g,440,170);
+    // middle right
+        snowflake.draw(g,650,260);
+        snowflake.draw(g,880,340);
+        snowflake.draw(g,830,290);
+    //middle left
+        snowflake.draw(g,230, 355);
+        snowflake.draw(g,120, 290);
+        snowflake.draw(g,50, 366);
+        snowflake.draw(g,180, 244);
+    // very bottom
+        snowflake.draw(g,70,490);   // left side
+        snowflake.draw(g,120,520);
+        snowflake.draw(g,700,500);
+        snowflake.draw(g,550,450);
+        snowflake.draw(g,260,470);
+        snowflake.draw(g,800, 510);
+        snowflake.draw(g,910, 480);
+        snowflake.draw(g,470, 460);
+
+// on pipes
+        snow.setHeight(15); // top left pipe
+        snow.setWidth(60);
+        snow.drawSnow(g,15,18);
+        snow.drawSnow(g,920,20); // top right pipe
+        snow.setHeight(15); // bottom left pipe
+        snow.setWidth(70);
+        snow.drawSnow(g,0,520);
+        snow.drawSnow(g,940,520);   // bottom right
+// on platforms
+        snow.setHeight(15);
+        snow.setWidth(368);
+        snow.drawSnow(g,0,400);      // bottom left platform
+        snow.drawSnow(g,0,140);   // top left
+        snow.setHeight(15);
+        snow.setWidth(390);
+        snow.drawSnow(g,602,398);       //bottom right
+        snow.drawSnow(g,602,145);
+        snow.setHeight(15);     // middle
+        snow.setWidth(280);
+        snow.drawSnow(g,330,290);
+
+    // mario's christmas hat
+        hat.setHeight(10);
+        hat.setWidth(74);
+        hat.drawHat(g,mario.getPosX(),mario.getPosY());
+        hat.setHeight(20);
+        hat.setWidth(60);
+        hat.drawHat2(g,mario.getPosX() +8,mario.getPosY() - 20);
+
+        hat.setHeight(15);  // last portion
+        hat.setWidth(15);
+        hat.drawHat(g,mario.getPosX() + 25,mario.getPosY() - 35);
+    // luigi's christmas hat
+        hat.setHeight(10);
+        hat.setWidth(74);
+        hat.drawHat(g,luigi.getPosX(),luigi.getPosY());
+        hat.setHeight(20);
+        hat.setWidth(60);
+        hat.drawHat2(g,luigi.getPosX() +8,luigi.getPosY() - 20);
+
+        hat.setHeight(15);  // last portion
+        hat.setWidth(15);
+        hat.drawHat(g,luigi.getPosX() + 25,luigi.getPosY() - 35);
+
     }
     g.update();
     }
