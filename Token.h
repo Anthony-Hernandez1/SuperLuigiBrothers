@@ -20,6 +20,33 @@ private:
 
 
 public:
+    
+    int setPosX(int x)
+    {
+        mPosX=x;
+    }
+
+    int setPosY(int y ){
+        mPosY=y;
+
+    }
+    int getPosx(){
+        return mPosX;
+    }
+
+    int getPosY()
+    {
+        return mPosY;
+    }
+    int getWidth()
+    {
+        return WIDTH;
+    }
+
+    int getHeight()
+    {
+        return HEIGHT;
+    }
 
     void move(int xOffset, int yOffset) {
         mPosX = min(max(mPosX + xOffset, 0), windowWidth - WIDTH);
