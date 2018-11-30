@@ -53,18 +53,50 @@ public:
         pY = posY;
     }
 //mutators
+
+//************************************************************
+// Function: setWidth                                        *
+// Description: sets w to width                              *
+// Return: none                                              *
+// Precondition: none                                        *
+// Postcondition: none                                       *                                                 
+//************************************************************
     void setWidth(int w)
     {
         width = w;
     }
+    
+//************************************************************
+// Function: setHeight                                       *
+// Description: sets h to height                             *
+// Return: none                                              *
+// Precondition: none                                        *
+// Postcondition: none                                       *                                                 
+//************************************************************
     void setHeight(int h)
     {
         height = h;
     }
+    
+//************************************************************
+// Function: setFloorWidth                                   *
+// Description: sets wf to width                             *
+// Return: none                                              *
+// Precondition: none                                        *
+// Postcondition: none                                       *                                                 
+//************************************************************
     void setFloorWidth(int wF)
     {
         wFloor = wF;
     }
+    
+//************************************************************
+// Function: setFloorHeight                                  *
+// Description: sets hf to height                            *
+// Return: none                                              *
+// Precondition: none                                        *
+// Postcondition: none                                       *                                                 
+//************************************************************
     void setFloorHeight(int hF)
     {
         hFloor = hF;
