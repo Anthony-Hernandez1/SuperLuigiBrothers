@@ -204,42 +204,94 @@ public:
         hp = h;
     }
 
+//************************************************************
+// Function: setPosX2                                        *
+// Description: sets x to posX2                              *
+// Return: none                                              *
+// Precondition: the second enemy is displayed to the screen *
+// Postcondition: the enemy is still on the screen           *                                                 
+//************************************************************
     void setPosX2(int x)
     {
         posX = x;
     }
 
+//************************************************************
+// Function: setPosY2                                        *
+// Description: sets y to posY2                              *
+// Return: none                                              *
+// Precondition: the second enemy is displayed to the screen *
+// Postcondition: the enemy is still on the screen           *                                                 
+//************************************************************
     void setPosY2(int y)
     {
         posY = y;
     }
 // accessors
+
+//************************************************************
+// Function: getHealth                                       *
+// Description: returns hp(health)                           *
+// Return: returns hp(health)                                *
+// Precondition: none                                        *
+// Postcondition: none                                       *                                                 
+//************************************************************
     int getHealth()
     {
         return hp;
     }
 
+//************************************************************
+// Function: get                                       *
+// Description: returns hp(health)                           *
+// Return: returns hp(health)                                *
+// Precondition: none                                        *
+// Postcondition: none                                       *                                                 
+//************************************************************
     int getPosX2()
     {
         return posX2;
     }
 
+
+//************************************************************
+// Function: getPosX2                                        *
+// Description: returns the y position                       *
+// Return: integer/position of y                             *
+// Precondition: none                                        *
+// Postcondition: none                                       *                                                 
+//************************************************************
     int getPosY2()
     {
         return posY2;
     }
 
+
+//************************************************************
+// Function: getWidth                                        *
+// Description: allows the user to get the width             *
+// Return: integer/ width                                    *
+// Precondition: none                                        *
+// Postcondition: none                                       *                                                 
+//************************************************************
     int getWidth()
     {
         return width;
     }
 
+//************************************************************
+// Function: getHeight                                       *
+// Description: allows the user to get heightnnn             *
+// Return: integer/ height                                   *
+// Precondition: none                                        *
+// Postcondition: none                                       *                                                 
+//************************************************************
     int getHeight()
     {
         return height;
     }
 
-// destroy
+//destroy
     void die()
     {
        // if(Collision(Enemy e,Player p))
