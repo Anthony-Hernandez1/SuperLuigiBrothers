@@ -12,7 +12,7 @@
 #include "Enemy.h"
 #include "Score.h"
 #include "Token.h"
-#include "Collision.h"
+//#include "Collision.h"
 #include "Level1.h"
 using namespace std;
 const int GRAVITY = -1;
@@ -26,6 +26,7 @@ int main(int argc, char ** argv)
     Color color;
 
     Score score1;
+// Player initialization
     Player mario;
     Player luigi;
     Floor plat1,    //bottom left
@@ -35,6 +36,10 @@ int main(int argc, char ** argv)
           middlePlat,
           f,
          leftPipe1, //top left
+         vtPipe1,   // draws vertical pipe upwards
+         vtPipe2,
+         hzPipe1,
+         hzPipe2,      // draws second pipe above first
          rightPipe1,    // top right
          leftPipe2, // bottom left
          rightPipe2,    // bottom right
@@ -42,23 +47,36 @@ int main(int argc, char ** argv)
     Enemy turtle,
           turtle2;
     Token token;
+
+    Level1 L,
+           L2,
+           box1;
+
+
     while ((turtle.posY!= windowHeight-turtle.height-40) && (turtle2.posY!= windowHeight - turtle2.height - 40))
     {
-        turtle.posY+=1;  //GRAVITY FOR TURTLE
-        turtle2.posY+=1;
+        turtle.gravity(-1);  //GRAVITY FOR TURTLE
+        turtle2.gravity2(-1);
     }
 
     int tempScore = 0;
     //collide.collision(turtle, mario);
    // collide.getCollision();
 
-// player initialized
-        g.initSound("music.wav");
-        g.playSound("music.wav");
+// initializes the music
+
+        g.initSound("theme.wav");
+        g.initSound("level5theme.wav");
+        g.initSound("level2theme.wav");
     while((!g.getQuit()))
     {
-        g.initSound("theme.wav");
-        g.playSound("theme.wav");
+        if (tempScore < 3000)
+        {
+            g.playSound("theme.wav");
+        }
+/***************************
+*   "Collision" for Mario "*
+****************************/
         if((mario.getPosX() > 254&&mario.getPosX()<603)&&(mario.getPosY() > 280 && mario.getPosY() < 325))
         {
          mario.setPosX(254);
@@ -77,6 +95,26 @@ int main(int argc, char ** argv)
          mario.setPosY(277);
         }
 
+        if((turtle2.getPosX2() > 254&&turtle2.getPosX2()<603)&&(turtle2.getPosY2() > 280 && turtle.getPosY2() < 325))
+        {
+         turtle2.setPosX2(254);
+        }
+        if((turtle2.getPosX2() < 610&&turtle2.getPosX2()>255)&&(turtle2.getPosY2() > 280 && turtle2.getPosY2() < 325))
+        {
+         turtle2.setPosX2(610);
+
+        }
+        if((turtle2.getPosX2() > 255 && turtle2.getPosX2() < 610)&&(turtle2.getPosY2() < 327&&turtle2.getPosY2() >278 ))
+        {
+         turtle2.setPosY2(326);
+        }
+        if((turtle2.getPosX2() > 255 && turtle2.getPosX2() < 610)&&(turtle2.getPosY2() > 277&&turtle2.getPosY2() < 326))
+        {
+         turtle2.setPosY2(277);
+        }
+
+
+
         mario.gravity(-1);      // GRAVITY FOR PLAYER1
         luigi.gravity(-1);      // GRAVITY FOR PLAYER2
     //input
@@ -91,7 +129,6 @@ int main(int argc, char ** argv)
             mario.movePlayer(0,-200);
             g.initSound("jumps.wav");
             g.playSound("jumps.wav");
-            tempScore++;
         }
         else if (g.getKey() == RIGHT_ARROW)
         {
@@ -118,9 +155,6 @@ int main(int argc, char ** argv)
         {
             luigi.moveLeft(-1);
         }
-        else if (g.kbhit()){
-            mario.falling();
-        }
 
         if(g.kbhit()){
             g.getKey();
@@ -143,23 +177,39 @@ int main(int argc, char ** argv)
         token.move(1,1);
 
         turtle.moveRight(1);
-        turtle2.moveRight(1);
+      //  turtle2.moveLeft2(-1);
 
       /* while(mario.getPosX()== plat1.draw(g,0,400) || mario.getPosY() == plat1.draw(g,0,400)){
         mario.movePlayer(0,0);
        }*/
 /****************************
-*       platforms     *
+*      LEVEL1 platforms     *
 ****************************/
 //color
+        int pX = 300;
+        int pY = 10;
+        L.draw(g,pX,pY);
+        pX = 300;
+        pY = 50;
+        L2.setWidth(50);
+        L2.setHeight(20);
+        L2.draw(g,pX,pY);
+
+        pX = 400;
+        pY = 50;
+        box1.setWidth(40);
+
+
+
 
 //platform1
         plat1.setWidth(370);    // bottom left platform
         plat1.setHeight(30);
         plat1.draw(g,0,400);
-        while(mario.getPosX()== plat1.getHeight() && mario.getPosY() == plat1.getWidth()){
-        mario.setPosX(!0);
-        mario.setPosY(!400);
+        while(mario.getPosX()== plat1.getHeight() && mario.getPosY() == plat1.getWidth())
+        {
+            mario.setPosX(!0);
+            mario.setPosY(!400);
         }
         plat2.setWidth(400);    // bottom right platform
         plat2.setHeight(30);
@@ -186,28 +236,50 @@ int main(int argc, char ** argv)
         leftPipe1.setHeight(25);
         leftPipe1.drawPipe(g,0,530);
 
-        leftPipe2.setWidth(70);    // bottom right
-        leftPipe2.setHeight(25);
-        leftPipe2.drawPipe(g,940,530);
+        leftPipe2.setWidth(50);    // top left
+        leftPipe2.setHeight(35);
+        leftPipe2.drawPipe(g,0,100);
+        vtPipe1.setWidth(35);
+        vtPipe1.setHeight(90);
+        vtPipe1.drawPipe(g,15,30);
+        hzPipe1.setWidth(60);
+        hzPipe1.setHeight(35);
+        hzPipe1.drawPipe(g,15,30);
+
+        rightPipe1.setWidth(70);    // bottom right
+        rightPipe1.setHeight(25);
+        rightPipe1.drawPipe(g,940,530);
+
+        rightPipe2.setWidth(50);    // top right
+        rightPipe2.setHeight(35);
+        rightPipe2.drawPipe(g,950,100);
+        vtPipe2.setWidth(35);
+        vtPipe2.setHeight(90);
+        vtPipe2.drawPipe(g,945,45);
+        hzPipe2.setWidth(60);
+        hzPipe2.setHeight(35);
+        hzPipe2.drawPipe(g,920,30);
+
 
 /***********************************
             LEVEL 2                 *
 *************************************/
-
-    if(tempScore >= 2000)
+    if(tempScore >= 3000)
     {
     //redraw for second level
+        g.quitSound("theme.wav");
+        g.playSound("level2theme.wav");
         plat1.drawLevel2(g,0,400);
         plat2.drawLevel2(g,600,400);
         plat3.drawLevel2(g,0,150);
         plat4.drawLevel2(g,600,150);
         middlePlat.drawLevel2(g,330,300);
+
     }
 /****************************************
 *           LEVEL 3                     *
 *****************************************/
-
-    if (tempScore >= 3000)
+    if (tempScore >= 4000)
     {
         plat1.drawLevel3(g,0,400);
         plat2.drawLevel3(g,600,400);
@@ -220,7 +292,7 @@ int main(int argc, char ** argv)
 *               LEVEL 4                   *
 *******************************************/
 
-    if (tempScore >= 4000)
+    if (tempScore >= 5000)
     {
         plat1.drawLevel4(g,0,400);
         plat2.drawLevel4(g,600,400);
@@ -233,15 +305,16 @@ int main(int argc, char ** argv)
 *               LEVEL 5                   *
 *******************************************/
 
-    if (tempScore >= 5000)
+    if (tempScore >= 6000)
     {
+        g.quitSound("level2theme.wav");
+        g.playSound("level5theme.wav");
         plat1.drawLevel5(g,0,400);
         plat2.drawLevel5(g,600,400);
         plat3.drawLevel5(g,0,150);
         plat4.drawLevel5(g,600,150);
         middlePlat.drawLevel5(g,330,300);
     }
-
 
     g.update();
     }
