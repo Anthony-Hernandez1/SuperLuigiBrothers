@@ -57,13 +57,14 @@ int main(int argc, char ** argv)
            box5,
            box6;
 
-
+//while the turtle is displayed onto the screen, the gravity for the turtle exists
     while ((turtle.posY!= windowHeight-turtle.height-40) && (turtle2.posY!= windowHeight - turtle2.height - 40))
     {
         turtle.gravity(-1);  //GRAVITY FOR TURTLE
         turtle2.gravity2(-1);
     }
 
+//sets the temporary score to 0
     int tempScore = 0;
     //collide.collision(turtle, mario);
    // collide.getCollision();
@@ -74,6 +75,8 @@ int main(int argc, char ** argv)
         g.initSound("level5theme.wav");
         g.initSound("level2theme.wav");
         g.initSound("christmas.wav");
+        
+//while the game exists, there will be music played
     while((!g.getQuit()))
     {
         if (tempScore < 3000)
@@ -83,6 +86,8 @@ int main(int argc, char ** argv)
 /***************************
 *   "Collision" for Mario "*
 ****************************/
+
+//checks the sides of the platforms for collision (mario)
         if((mario.getPosX() > 254 && mario.getPosX()<603)&&(mario.getPosY() > 280 && mario.getPosY() < 325))
         {
          mario.setPosX(254);
@@ -100,7 +105,9 @@ int main(int argc, char ** argv)
         {
          mario.setPosY(277);
         }
+        
 
+//checks the platform sides for the turtle
         if((turtle2.getPosX2() > 254&&turtle2.getPosX2()<603)&&(turtle2.getPosY2() > 280 && turtle.getPosY2() < 325))
         {
          turtle2.setPosX2(254);
@@ -122,10 +129,13 @@ int main(int argc, char ** argv)
 /***************************
 *   "Collision" for Token "*
 ****************************/
+
         if((mario.getPosX() > 330 &&mario.getPosX()< 510 )&&(mario.getPosY() > 300 && mario.getPosY() < 330))
         {
          mario.setPosX(300);
         }
+ 
+ //teleports token from one side of the game to the other
         if(token.getPosX() >= 950 && token.getPosY() < 1000)
         {
             token.setPosX(0);
@@ -133,7 +143,7 @@ int main(int argc, char ** argv)
         }
 
 
-        //FOR MIDDLE PLATFORM COLLISION
+        //FOR MIDDLE PLATFORM COLLISION checks the 4 sides
         if((luigi.getPosX() > 254 && luigi.getPosX()<603)&&(luigi.getPosY() > 280 && luigi.getPosY() < 325))
         {
          luigi.setPosX(254);
@@ -156,7 +166,7 @@ int main(int argc, char ** argv)
         }
 
 
-        //for bottom right platform
+        //for bottom right platform and checks collision
         if((luigi.getPosX() > 100 && luigi.getPosX() < 700) && (luigi.getPosY() > 600 && luigi.getPosY() < 1000))
         {
          luigi.setPosX(570);
@@ -177,26 +187,35 @@ int main(int argc, char ** argv)
         while(mario.hp == 1){
             mario.falling();
         }
+        
+        //score increases
         tempScore++;
+        //displays to the screen
         cout << tempScore<< endl;
 
+//if the key is up, mario moves up and makes sound
         if (g.getKey() == UP_ARROW)
         {
             mario.movePlayer(0,-200);
             g.initSound("jumps.wav");
             g.playSound("jumps.wav");
         }
+        
+  //if the key is to the right, it moves to the right
         else if (g.getKey() == RIGHT_ARROW)
         {
             mario.moveRight(1);
             //score1.changeScore();
 
         }
+        
+//if the key is the left one, the player moves to the left
         else if (g.getKey() == LEFT_ARROW)
         {
             mario.moveLeft(-1);
         }
-//LUIGI
+//LUIGI 
+//allows luigi to mobe with the wasd keys
         else if(g.getKey() == 'W') // allows you to move
         {
             luigi.moveLuigi(0,-1);
@@ -221,19 +240,20 @@ int main(int argc, char ** argv)
             g.getKey();
         }
         g.clear();
-    //drawing
+    //drawing characters to the screen
         mario.draw(g);
         luigi.draw(g);
 /*******************
 *       Enemy       *
 ********************/
-
+//draws the enemies to the screen
         turtle.drawEnemy(g);
         turtle2.drawEnemy2(g);
 
 /********************
 *    NPC Movement   *
 *********************/
+//draws the token to the screen
         token.draw1(g);
         token.move(1,1);
 
@@ -246,6 +266,7 @@ int main(int argc, char ** argv)
 *      LEVEL1 platforms     *
 ****************************/
 //color
+//draws the platforms to the screen
         int pX = 300;
         int pY = 10;
         L.draw(g,pX,pY);
@@ -292,6 +313,8 @@ int main(int argc, char ** argv)
 /*********************
 *   Pipes           *
 *********************/
+
+//draws the pipes
         leftPipe1.setWidth(70);    // bottom left
         leftPipe1.setHeight(25);
         leftPipe1.drawPipe(g,0,530);
@@ -324,6 +347,7 @@ int main(int argc, char ** argv)
 /***********************************
             LEVEL 2                 *
 *************************************/
+//sets everything for level 2
     if(tempScore >= 10000)
     {
     //redraw for second level
@@ -344,6 +368,7 @@ int main(int argc, char ** argv)
 /****************************************
 *           LEVEL 3                     *
 *****************************************/
+//sets everything for level 3
     if (tempScore >= 20000)
     {
         plat1.drawLevel3(g,0,400);
@@ -361,7 +386,7 @@ int main(int argc, char ** argv)
 /******************************************
 *               LEVEL 4                   *
 *******************************************/
-
+//sets everything for level 4
     if (tempScore >= 30000)
     {
         plat1.drawLevel4(g,0,400);
@@ -380,7 +405,7 @@ int main(int argc, char ** argv)
 /******************************************
 *               LEVEL 5                   *
 *******************************************/
-
+//sets everything for level 5
     if (tempScore >= 40000)
     {
         g.quitSound("level2theme.wav");
@@ -400,6 +425,7 @@ int main(int argc, char ** argv)
 /******************************************
 *               SECRET LEVEL              *
 *******************************************/
+//sets everything for the secret level
     if(tempScore >= 50000)
     {
         g.quitSound("level2theme.wav");
