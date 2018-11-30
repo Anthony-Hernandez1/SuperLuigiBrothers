@@ -38,8 +38,19 @@ public:
             }
         }
     }
+    
+    bool collidesWith(Floor  &p)
+    {
+        bool flag = true;
+        if((p.getPosX()+p.getHeight() < p.getPosX())|| (p.getPosY()+p.getHeight()<p.getPosY())
+           || (p.getPosX() >p.getPosX()+p.getWidth()) || (p.getPosY() > p.getPosY()+p.getHeight())){
+            flag = false;
+        }
+        return flag;
+    }
+
     //reads from file and sets it in array
-    void createToken()
+    /*void createToken()
     {
     ifstream tFile;
     tFile.open("Token.txt");
@@ -55,87 +66,8 @@ public:
         }
     }
     tFile.close();
-}
-    //updated draw so that it draws from file;
-    /*
-    void draw(SDL_Plotter& g)
-{
-    erase(g);
-    for(int y =0;y < row; y++){
-        for(int x = 0; x < col; x++){
-
-            if(player[y][x].R == 255 && player[y][x].G == 255 && player[y][x].B == 255)
-            {
-                player[y][x].R = background[loc.x+x][loc.y+y].R;
-                player[y][x].G = background[loc.x+x][loc.y+y].G;
-                player[y][x].B = background[loc.x+x][loc.y+y].B;
-            }
-
-            g.plotPixel(loc.x+x,loc.y+y,player[y][x].R, player[y][x].G, player[y][x].B);
-        }
-    }
-}
-*/
-};
-
-
-       /* while (true) {
-            mPosX += mVelX;
-            mCollider.x = mPosX;
-
-//If the dot collided or went too far to the left or right
-            if ((mPosX < 0) || (mPosX + DOT_WIDTH > windowWidth)) {
-//Move back
-                mPosX -= mVelX;
-                mCollider.x = mPosX;
-            }
-
-//Move the dot up or down
-            mPosY += mVelY;
-            mCollider.y = mPosY;
-
-//If the dot collided or went too far up or down
-            if ((mPosY < 0) || (mPosY + DOT_HEIGHT > windowHeight)) {
-//Move back
-                mPosY -= mVelY;
-                mCollider.y = mPosY;
-            }
-        }
-    }
-};
-
-/*class Dot
-{
-public:
-    //The dimensions of the dot
-    static const int DOT_WIDTH = 20;
-    static const int DOT_HEIGHT = 20;
-
-    //Maximum axis velocity of the dot
-    static const int DOT_VEL = 10;
-
-    //Initializes the variables
-    Dot();
-
-    //Takes key presses and adjusts the dot's velocity
-    void handleEvent( SDL_Event& e );
-
-    //Moves the dot and checks collision
-    void move( SDL_Rect& wall );
-
-    //Shows the dot on the screen
-    void render();
-
-private:
-    //The X and Y offsets of the dot
-    int mPosX, mPosY;
-
-    //The velocity of the dot
-    int mVelX, mVelY;
-
-    //Dot's collision box
-    SDL_Rect mCollider;
-};*/
+}*/
+    
 
 
 
