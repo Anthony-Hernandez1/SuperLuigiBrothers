@@ -1,5 +1,0 @@
- if(token.getPosX() >= 950 && token.getPosY() < 1000)
-        {
-            token.setPosX(0);
-            token.setPosY(0);
-        }
