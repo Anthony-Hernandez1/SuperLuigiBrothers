@@ -98,6 +98,14 @@ public:
         posY+=1;
         }
     }
+    
+//************************************************************
+// Function: drawEnemy                                       *
+// Description: draws the enemy to the screen                *
+// Return: none                                              *
+// Precondition: the enemy is called in the main             *
+// Postcondition: the enemy is on the screen                 *
+//************************************************************
     void drawEnemy(SDL_Plotter & g)
     {
         for (int col = posX; col < width + posX; col++)   // goes through all columns
@@ -108,6 +116,14 @@ public:
             }
         }
     }
+    
+//************************************************************
+// Function: drawEnemy2                                      *
+// Description: draws second the enemy to the screen         *
+// Return: none                                              *
+// Precondition: the enemy is called in the main             *
+// Postcondition: the enemy is on the screen                 *
+//************************************************************
     void drawEnemy2(SDL_Plotter & g)
     {
         for (int col = posX2; col < width + posX2; col++)   // goes through all columns
@@ -118,33 +134,71 @@ public:
             }
         }
     }
-/***********************************
-            void move2
-* description: movement for enemy2 *
-*
-*
-*************************************/
+    
+    
+
+//************************************************************
+// Function: move2                                           *
+// Description: This allows the enemy to move by increasing  *
+//          and decreasing the the x position by 5 and using *
+//          that for the volocity of x and y                 *
+// Return: none                                              *
+// Precondition:that the enemy actually needs to move        *
+// Postcondition: the enemy is where it needs  to be         *
+//************************************************************
     void move2(int xOffset, int yOffset)   // allows you to move
     {
         posY2 = min(max(posY2 + yOffset, 0), windowHeight - height-40);
     }
 
+//************************************************************
+// Function: moveLeft2                                       *
+// Description: moves the enemy to the left                  *
+// Return: none                                              *
+// Precondition:that the left key is pressed                 *
+// Postcondition: the enemy is where it needs to be          *
+//                                                           *
+//************************************************************
     void moveLeft2(int xOffset)
     {
         posX2-=1;
     }
 
+//************************************************************
+// Function: moveRight2                                      *
+// Description: moves the enemy to the right                 *
+// Return: none                                              *
+// Precondition:that the right key is pressed                *
+// Postcondition: the enemy is where it needs to be          *                                                    
+//************************************************************
     void moveRight2(int xOffset)
     {
         posX2+=1;
     }
+    
+//************************************************************
+// Function: gravity                                         *
+// Description: allows gravity to exist for the enemy 2      *
+// Return: none                                              *
+// Precondition: none, gravity occurs in the game            *
+// Postcondition: none                                       *                                                 
+//************************************************************
     void gravity2(int yOffset)
     {
-        while (posY2!= windowHeight-height-40){
-        posY2+=1;
+        while (posY2!= windowHeight-height-40)
+        {
+             posY2+=1;
         }
     }
 // mutators
+
+//************************************************************
+// Function: sets health                                     *
+// Description: sets h to health(hp)                         *
+// Return: none                                              *
+// Precondition: the enemy is alive                          *
+// Postcondition: there are lives left                       *                                                 
+//************************************************************
     void setHealth(int h)
     {
         hp = h;
