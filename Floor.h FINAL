@@ -53,50 +53,18 @@ public:
         pY = posY;
     }
 //mutators
-
-//************************************************************
-// Function: setWidth                                        *
-// Description: sets w to width                              *
-// Return: none                                              *
-// Precondition: none                                        *
-// Postcondition: none                                       *                                                 
-//************************************************************
     void setWidth(int w)
     {
         width = w;
     }
-    
-//************************************************************
-// Function: setHeight                                       *
-// Description: sets h to height                             *
-// Return: none                                              *
-// Precondition: none                                        *
-// Postcondition: none                                       *                                                 
-//************************************************************
     void setHeight(int h)
     {
         height = h;
     }
-    
-//************************************************************
-// Function: setFloorWidth                                   *
-// Description: sets wf to width                             *
-// Return: none                                              *
-// Precondition: none                                        *
-// Postcondition: none                                       *                                                 
-//************************************************************
     void setFloorWidth(int wF)
     {
         wFloor = wF;
     }
-    
-//************************************************************
-// Function: setFloorHeight                                  *
-// Description: sets hf to height                            *
-// Return: none                                              *
-// Precondition: none                                        *
-// Postcondition: none                                       *                                                 
-//************************************************************
     void setFloorHeight(int hF)
     {
         hFloor = hF;
@@ -128,7 +96,7 @@ public:
         {
             for (int row = posY; row < height + posY; ++row)
             {
-                g.plotPixel(col,row, color.red, color.green, color.blue);
+                g.plotPixel(col,row, 11, 127, 229);
             }
         }
     }
@@ -215,7 +183,7 @@ public:
         {
             for (int row = posY; row < hFloor + posY; ++row)
             {
-                g.plotPixel(col,row, 102, 51, 0);
+                g.plotPixel(col,row, 119, 5, 15);
             }
         }
     }
@@ -226,7 +194,7 @@ public:
         {
             for (int row = posY; row < height + posY; ++row)
             {
-                g.plotPixel(col,row, 57, 230, 0);
+                g.plotPixel(col,row, 42, 109, 31);
             }
         }
     }
