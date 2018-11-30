@@ -5,7 +5,6 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 #include <iostream>
-#include <algorithm>
 #include "SDL_Plotter.h"
 #include "Player.h"
 //#include "Collisions.h"
@@ -35,7 +34,13 @@ public:
         posY = 5;
         hp = 1;
     }
-
+/***************************************
+*          void move(int)          *
+* description: moves Luigi, floats
+* return: void
+* pre: x/y coordinates set
+* post: returns void
+**************************************/
     void move(int xOffset, int yOffset)   // allows you to move
     {
         posX = min(max(posX + xOffset, 0), windowWidth - width);
@@ -43,17 +48,35 @@ public:
         velX = posX +1;
         velY = posY -10;
     }
-
+/***************************************
+*          void moveLeft(int)          *
+* description: subtracts from x-coordinate
+* return: void
+* pre: key == left arrow
+* post: returns void
+**************************************/
     void moveLeft(int xOffset)
     {
         posX-=1;
     }
-
+/***************************************
+*          void moveRight(int)          *
+* description: adds to player's x-coordinate
+* return: void
+* pre: key == right arrow                *
+* post: returns void
+**************************************/
     void moveRight(int xOffset)
     {
         posX+=1;
     }
-
+/***************************************
+*           void gravity(int)          *
+* description: pulls enemy to ground
+* return: void
+* pre: enemy exists
+* post: returns void
+**************************************/
     void gravity(int yOffset)
     {
         while (posY!= windowHeight-height-40){
@@ -80,43 +103,42 @@ public:
             }
         }
     }
-/***********************************
-            void move2
-* description: movement for enemy2 *
-*
-*
-*************************************/
-    void move2(int xOffset, int yOffset)   // allows you to move
-    {
-        posY2 = min(max(posY2 + yOffset, 0), windowHeight - height-40);
-    }
 
-    void moveLeft2(int xOffset)
-    {
-        posX2-=1;
-    }
-
-    void moveRight2(int xOffset)
-    {
-        posX2+=1;
-    }
     void gravity2(int yOffset)
     {
         while (posY2!= windowHeight-height-40){
         posY2+=1;
         }
     }
-// mutators
+/****************************
+*       void setHealth(int)   *
+* description: sets hp of player
+* return: void
+* pre: player exists
+* post: returns void
+******************************/
     void setHealth(int h)
     {
         hp = h;
     }
-
+/****************************
+*       void setPosX(int)   *
+* description: reads in posX
+* return: void
+* pre: x coordinate exists
+* post: returns void
+******************************/
     void setPosX(int x)
     {
         posX = x;
     }
-
+/****************************
+*       void setPosY(int)   *
+* description: reads in posY
+* return: void
+* pre: y coordinate exists
+* post: returns void
+******************************/
     void setPosY(int y)
     {
         posY = y;
@@ -126,22 +148,46 @@ public:
     {
         return hp;
     }
-
+/****************************
+*       int getPosX()   *
+* description: retrieves xPos
+* return: int
+* pre: x position read in
+* post: returns int
+******************************/
     int getPosX()
     {
         return posX;
     }
-
+/****************************
+*       int getPosY()   *
+* description: retrieves yPos
+* return: int
+* pre: y position read in
+* post: returns int
+******************************/
     int getPosY()
     {
         return posY;
     }
-
+/****************************
+*       int getWidth()   *
+* description: retrieves width
+* return: int
+* pre: width read in
+* post: returns int
+******************************/
     int getWidth()
     {
         return width;
     }
-
+/****************************
+*       int getFloorHeight()   *
+* description: retrieves height
+* return: int
+* pre: height read in
+* post: returns int
+******************************/
     int getHeight()
     {
         return height;
