@@ -1,0 +1,418 @@
+/***********************************
+*       square with classes         *
+*   does not work as of yet         *
+************************************/
+
+#include <iostream>
+#include <cmath>
+#include <fstream>
+#include "SDL_Plotter.h"
+#include "Player.h"
+#include "floor.h"
+#include "Enemy.h"
+#include "Score.h"
+#include "Token.h"
+//#include "Collision.h"
+#include "Level1.h"
+using namespace std;
+const int GRAVITY = -1;
+int main(int argc, char ** argv)
+{
+    ifstream input;
+    const int windowHeight = 600;
+    const int windowWidth = 1000;
+    SDL_Plotter g(windowHeight,windowWidth);   // makes width and height of play window
+
+    Color color;
+
+    Score score1;
+// Player initialization
+    Player mario;
+    Player luigi;
+    Floor plat1,    //bottom left
+          plat2,    // bottom right
+          plat3,    // top left
+          plat4,    // top right platform
+          middlePlat,
+          f,
+         leftPipe1, //top left
+         vtPipe1,   // draws vertical pipe upwards
+         vtPipe2,
+         hzPipe1,
+         hzPipe2,      // draws second pipe above first
+         rightPipe1,    // top right
+         leftPipe2, // bottom left
+         rightPipe2,    // bottom right
+         plat5;
+    Enemy turtle,
+          turtle2;
+    Token token;
+
+    Level1 L,
+           L2,
+           box1,
+           box2,
+           box3,
+           box4,
+           box5,
+           box6;
+
+
+    while ((turtle.posY!= windowHeight-turtle.height-40) && (turtle2.posY!= windowHeight - turtle2.height - 40))
+    {
+        turtle.gravity(-1);  //GRAVITY FOR TURTLE
+        turtle2.gravity2(-1);
+    }
+
+    int tempScore = 0;
+    //collide.collision(turtle, mario);
+   // collide.getCollision();
+
+// initializes the music
+
+        g.initSound("theme.wav");
+        g.initSound("level5theme.wav");
+        g.initSound("level2theme.wav");
+        g.initSound("christmas.wav");
+    while((!g.getQuit()))
+    {
+        if (tempScore < 3000)
+        {
+            g.playSound("theme.wav");
+        }
+/***************************
+*   "Collision" for Mario "*
+****************************/
+        if((mario.getPosX() > 254 && mario.getPosX()<603)&&(mario.getPosY() > 280 && mario.getPosY() < 325))
+        {
+         mario.setPosX(254);
+        }
+        if((mario.getPosX() < 610 && mario.getPosX()>255)&&(mario.getPosY() > 280 && mario.getPosY() < 325))
+        {
+         mario.setPosX(610);
+
+        }
+        if((mario.getPosX() > 255 && mario.getPosX() < 610)&&(mario.getPosY() < 327&&mario.getPosY() >278 ))
+        {
+         mario.setPosY(326);
+        }
+        if((mario.getPosX() > 255 && mario.getPosX() < 610)&&(mario.getPosY() > 277&&mario.getPosY() < 326))
+        {
+         mario.setPosY(277);
+        }
+
+        if((turtle2.getPosX2() > 254&&turtle2.getPosX2()<603)&&(turtle2.getPosY2() > 280 && turtle.getPosY2() < 325))
+        {
+         turtle2.setPosX2(254);
+        }
+        if((turtle2.getPosX2() < 610&&turtle2.getPosX2()>255)&&(turtle2.getPosY2() > 280 && turtle2.getPosY2() < 325))
+        {
+         turtle2.setPosX2(610);
+
+        }
+        if((turtle2.getPosX2() > 255 && turtle2.getPosX2() < 610)&&(turtle2.getPosY2() < 327&&turtle2.getPosY2() >278 ))
+        {
+         turtle2.setPosY2(326);
+        }
+        if((turtle2.getPosX2() > 255 && turtle2.getPosX2() < 610)&&(turtle2.getPosY2() > 277&&turtle2.getPosY2() < 326))
+        {
+         turtle2.setPosY2(277);
+        }
+
+/***************************
+*   "Collision" for Token "*
+****************************/
+        if((mario.getPosX() > 330 &&mario.getPosX()< 510 )&&(mario.getPosY() > 300 && mario.getPosY() < 330))
+        {
+         mario.setPosX(300);
+        }
+        if(token.getPosX() >= 950 && token.getPosY() < 1000)
+        {
+            token.setPosX(0);
+            token.setPosY(0);
+        }
+
+
+        //FOR MIDDLE PLATFORM COLLISION
+        if((luigi.getPosX() > 254 && luigi.getPosX()<603)&&(luigi.getPosY() > 280 && luigi.getPosY() < 325))
+        {
+         luigi.setPosX(254);
+        }
+
+        if((luigi.getPosX() < 610 && luigi.getPosX()>255)&&(luigi.getPosY() > 280 && luigi.getPosY() < 325))
+        {
+         luigi.setPosX(610);
+
+        }
+
+        if((luigi.getPosX() > 255 && luigi.getPosX() < 610)&&(luigi.getPosY() < 327&&luigi.getPosY() >278 ))
+        {
+         luigi.setPosY(326);
+        }
+
+        if((luigi.getPosX() > 255 && luigi.getPosX() < 610)&&(luigi.getPosY() > 277&&luigi.getPosY() < 326))
+        {
+         luigi.setPosY(277);
+        }
+
+
+        //for bottom right platform
+        if((luigi.getPosX() > 100 && luigi.getPosX() < 700) && (luigi.getPosY() > 600 && luigi.getPosY() < 1000))
+        {
+         luigi.setPosX(570);
+        }
+        if((luigi.getPosX() < 1000 && luigi.getPosX()> 601)&&(luigi.getPosY() > 280 && luigi.getPosY() < 325))
+        {
+         luigi.setPosX(610);
+
+        }
+        if((luigi.getPosX() > 601 && luigi.getPosX() < 610)&&(luigi.getPosY() < 327&&luigi.getPosY() >278 ))
+        {
+         luigi.setPosY(326);
+        }
+
+        mario.gravity(-1);      // GRAVITY FOR PLAYER1
+        //luigi.gravity(-1);      // GRAVITY FOR PLAYER2
+    //input
+        while(mario.hp == 1){
+            mario.falling();
+        }
+        tempScore++;
+        cout << tempScore<< endl;
+
+        if (g.getKey() == UP_ARROW)
+        {
+            mario.movePlayer(0,-200);
+            g.initSound("jumps.wav");
+            g.playSound("jumps.wav");
+        }
+        else if (g.getKey() == RIGHT_ARROW)
+        {
+            mario.moveRight(1);
+            //score1.changeScore();
+
+        }
+        else if (g.getKey() == LEFT_ARROW)
+        {
+            mario.moveLeft(-1);
+        }
+//LUIGI
+        else if(g.getKey() == 'W') // allows you to move
+        {
+            luigi.moveLuigi(0,-1);
+            g.initSound("jumps.wav");
+            g.playSound("jumps.wav");
+        }
+        else if (g.getKey() == 'D')
+        {
+            luigi.moveLuigi(1,0);
+        }
+        else if (g.getKey() == 'A')
+        {
+            luigi.moveLuigi(-1,0);
+        }
+        else if (g.getKey() == 'S')
+        {
+            luigi.moveLuigi(0,1);
+        }
+
+        if(g.kbhit()){
+            turtle.moveRight(11);
+            g.getKey();
+        }
+        g.clear();
+    //drawing
+        mario.draw(g);
+        luigi.draw(g);
+/*******************
+*       Enemy       *
+********************/
+
+        turtle.drawEnemy(g);
+        turtle2.drawEnemy2(g);
+
+/********************
+*    NPC Movement   *
+*********************/
+        token.draw1(g);
+        token.move(1,1);
+
+      //  turtle2.moveLeft2(-1);
+
+      /* while(mario.getPosX()== plat1.draw(g,0,400) || mario.getPosY() == plat1.draw(g,0,400)){
+        mario.movePlayer(0,0);
+       }*/
+/****************************
+*      LEVEL1 platforms     *
+****************************/
+//color
+        int pX = 300;
+        int pY = 10;
+        L.draw(g,pX,pY);
+        pX = 300;
+        pY = 50;
+        L2.setWidth(50);
+        L2.setHeight(20);
+        L2.draw(g,pX,pY);
+
+        pX = 370;
+        pY = 10;
+        box1.setWidth(10);
+        box1.setHeight(60);
+        box1.draw(g,pX,pY);
+
+
+//platform1
+        plat1.setWidth(370);    // bottom left platform
+        plat1.setHeight(30);
+        plat1.draw(g,0,400);
+        while(mario.getPosX()== plat1.getHeight() && mario.getPosY() == plat1.getWidth())
+        {
+            mario.setPosX(!0);
+            mario.setPosY(!400);
+        }
+        plat2.setWidth(400);    // bottom right platform
+        plat2.setHeight(30);
+        plat2.draw(g,600,400);
+
+        plat3.setWidth(370);    // top left platform
+        plat3.setHeight(30);
+        plat3.draw(g,0,150);
+
+        plat4.setWidth(400);    // top right
+        plat4.setHeight(30);
+        plat4.draw(g,600,150);
+
+        middlePlat.setWidth(280);    // middle
+        middlePlat.setHeight(25);
+        middlePlat.draw(g,330,300);
+
+        f.drawFloor(g,0,560);
+
+/*********************
+*   Pipes           *
+*********************/
+        leftPipe1.setWidth(70);    // bottom left
+        leftPipe1.setHeight(25);
+        leftPipe1.drawPipe(g,0,530);
+
+        leftPipe2.setWidth(50);    // top left
+        leftPipe2.setHeight(35);
+        leftPipe2.drawPipe(g,0,100);
+        vtPipe1.setWidth(35);
+        vtPipe1.setHeight(90);
+        vtPipe1.drawPipe(g,15,30);
+        hzPipe1.setWidth(60);
+        hzPipe1.setHeight(35);
+        hzPipe1.drawPipe(g,15,30);
+
+        rightPipe1.setWidth(70);    // bottom right
+        rightPipe1.setHeight(25);
+        rightPipe1.drawPipe(g,940,530);
+
+        rightPipe2.setWidth(50);    // top right
+        rightPipe2.setHeight(35);
+        rightPipe2.drawPipe(g,950,100);
+        vtPipe2.setWidth(35);
+        vtPipe2.setHeight(90);
+        vtPipe2.drawPipe(g,945,45);
+        hzPipe2.setWidth(60);
+        hzPipe2.setHeight(35);
+        hzPipe2.drawPipe(g,920,30);
+
+
+/***********************************
+            LEVEL 2                 *
+*************************************/
+    if(tempScore >= 10000)
+    {
+    //redraw for second level
+        g.quitSound("theme.wav");
+        g.playSound("level2theme.wav");
+        plat1.drawLevel2(g,0,400);
+        plat2.drawLevel2(g,600,400);
+        plat3.drawLevel2(g,0,150);
+        plat4.drawLevel2(g,600,150);
+        middlePlat.drawLevel2(g,330,300);
+        pX = 400;
+        pY = 10;
+        box2.setWidth(10);
+        box2.setHeight(60);
+        box2.draw(g,pX,pY);
+
+    }
+/****************************************
+*           LEVEL 3                     *
+*****************************************/
+    if (tempScore >= 20000)
+    {
+        plat1.drawLevel3(g,0,400);
+        plat2.drawLevel3(g,600,400);
+        plat3.drawLevel3(g,0,150);
+        plat4.drawLevel3(g,600,150);
+        middlePlat.drawLevel3(g,330,300);
+        pX = 430;
+        pY = 10;
+        box3.setWidth(10);
+        box3.setHeight(60);
+        box3.draw(g,pX,pY);
+    }
+
+/******************************************
+*               LEVEL 4                   *
+*******************************************/
+
+    if (tempScore >= 30000)
+    {
+        plat1.drawLevel4(g,0,400);
+        plat2.drawLevel4(g,600,400);
+        plat3.drawLevel4(g,0,150);
+        plat4.drawLevel4(g,600,150);
+        middlePlat.drawLevel4(g,330,300);
+
+        pX = 460;
+        pY = 10;
+        box4.setWidth(10);
+        box4.setHeight(60);
+        box4.draw(g,pX,pY);
+    }
+
+/******************************************
+*               LEVEL 5                   *
+*******************************************/
+
+    if (tempScore >= 40000)
+    {
+        g.quitSound("level2theme.wav");
+        g.playSound("level5theme.wav");
+        plat1.drawLevel5(g,0,400);
+        plat2.drawLevel5(g,600,400);
+        plat3.drawLevel5(g,0,150);
+        plat4.drawLevel5(g,600,150);
+        middlePlat.drawLevel5(g,330,300);
+        pX = 490;
+        pY = 10;
+        box5.setWidth(10);
+        box5.setHeight(60);
+        box5.draw(g,pX,pY);
+    }
+
+/******************************************
+*               SECRET LEVEL              *
+*******************************************/
+    if(tempScore >= 50000)
+    {
+        g.quitSound("level2theme.wav");
+        g.quitSound("level5theme.wav");
+        g.quitSound("theme.wav");
+        //g.playSound("christmas.wav");
+        plat1.drawLevel6(g,0,400);
+        plat2.drawLevel6(g,600,400);
+        plat3.drawLevel6(g,0,150);
+        plat4.drawLevel6(g,600,150);
+        middlePlat.drawLevel6(g,330,300);
+    }
+    g.update();
+    }
+}
+
