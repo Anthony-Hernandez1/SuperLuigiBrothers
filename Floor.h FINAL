@@ -1,10 +1,8 @@
 #ifndef FLOOR_H
 #define FLOOR_H
 #include <iostream>
-#include <algorithm>
 #include "SDL_Plotter.h"
 #include <stdlib.h>
-#include <time.h>
 using namespace std;
 
 struct Color
@@ -33,9 +31,7 @@ private:
     int posY;
 
 public:
-// what object does
-//platforms
-    //floor
+
     int wFloor = 1000;
     int hFloor = 40;
     Floor()
@@ -44,6 +40,8 @@ public:
         height = 0;
         posX = 0;
         posY = 0;
+        int wFloor = 1000;
+    int hFloor = 40;
     }
     Floor(int w, int h, int pX, int pY)
     {
@@ -52,29 +50,70 @@ public:
         pX = posX;
         pY = posY;
     }
-//mutators
+/****************************
+*       void setWidth(int)   *
+* description: sets w from input
+* return: void
+* pre: width inputted
+* post: returns void
+******************************/
     void setWidth(int w)
     {
         width = w;
     }
+/****************************
+*       void setHeight(int)   *
+* description: sets h from input
+* return: void
+* pre: height inputted
+* post: returns void
+******************************/
     void setHeight(int h)
     {
         height = h;
     }
+/********************************
+*       void setFloorWidth(int)   *
+* description: sets w from input
+* return: void
+* pre: width inputted
+* post: returns void
+******************************/
     void setFloorWidth(int wF)
     {
         wFloor = wF;
     }
+/****************************
+*       void setFloorHeight(int)   *
+* description: sets h from input
+* return: void
+* pre: height inputted
+* post: returns void
+******************************/
     void setFloorHeight(int hF)
     {
         hFloor = hF;
     }
 
 //accessors
+/****************************
+*       int getWidth()   *
+* description: retrieves width
+* return: int
+* pre: width read in
+* post: returns int
+******************************/
     int getWidth()
     {
         return width;
     }
+/****************************
+*       int getHeight()   *
+* description: retrieves height
+* return: int
+* pre: height read in
+* post: returns int
+******************************/
     int getHeight()
     {
         return height;
@@ -83,12 +122,25 @@ public:
     {
         return wFloor;
     }
+/****************************
+*       int getFloorHeight()   *
+* description: retrieves height
+* return: int
+* pre: height read in
+* post: returns int
+******************************/
     int getFloorHeight()
     {
         return hFloor;
     }
 
-
+/******************************************
+*       int draw(SDL_Plotter,int,int)  *
+* description: plots pixels on screen
+* return: int
+* pre: x/y coordinates specified
+* post: returns int
+******************************************/
     int draw(SDL_Plotter & g, int posX,int posY)
     {
         Color color;
@@ -100,6 +152,13 @@ public:
             }
         }
     }
+/******************************************
+*       int drawLevel2(SDL_Plotter,int,int)  *
+* description: plots pixels on screen
+* return: int
+* pre: x/y coordinates specified
+* post: returns int
+******************************************/
     int drawLevel2(SDL_Plotter & g, int posX,int posY)
     {
         Color color;
@@ -114,7 +173,13 @@ public:
             }
         }
     }
-
+/******************************************
+*       int drawLevel3(SDL_Plotter,int,int)  *
+* description: plots pixels on screen
+* return: int
+* pre: x/y coordinates specified
+* post: returns int
+******************************************/
     int drawLevel3(SDL_Plotter & g, int posX,int posY)
     {
         Color color;
@@ -129,12 +194,18 @@ public:
             }
         }
     }
-
+/******************************************
+*       int drawLevel4(SDL_Plotter,int,int)  *
+* description: plots pixels on screen
+* return: int
+* pre: x/y coordinates specified
+* post: returns int
+******************************************/
     int drawLevel4(SDL_Plotter & g, int posX,int posY)
     {
         Color color;
-        color.red = 230;
-        color.blue = 0;
+        color.red = 0;
+        color.blue = 102;
         color.green= 0;
         for (int col = posX; col < width + posX; col++)   // goes through all columns
         {
@@ -144,7 +215,13 @@ public:
             }
         }
     }
-
+/******************************************
+*       int drawLevel5(SDL_Plotter,int,int)  *
+* description: plots pixels on screen
+* return: int
+* pre: x/y coordinates specified
+* post: returns int
+******************************************/
     int drawLevel5(SDL_Plotter & g, int posX,int posY)
     {
         Color color;
@@ -159,7 +236,13 @@ public:
             }
         }
     }
-
+/******************************************
+*       int drawLevel6(SDL_Plotter,int,int)  *
+* description: plots pixels on screen
+* return: int
+* pre: x/y coordinates specified
+* post: returns int
+******************************************/
     int drawLevel6(SDL_Plotter & g, int posX,int posY)
     {
         Color color;
@@ -176,18 +259,30 @@ public:
     }
 
 
-//floor
+/******************************************
+*       int drawFloor(SDL_Plotter,int,int)  *
+* description: plots pixels on screen
+* return: int
+* pre: x/y coordinates specified
+* post: returns int
+******************************************/
     void drawFloor(SDL_Plotter & g, int posX,int posY)
     {
         for (int col = posX; col < wFloor + posX; col++)   // goes through all columns
         {
             for (int row = posY; row < hFloor + posY; ++row)
             {
-                g.plotPixel(col,row, 119, 5, 15);
+                g.plotPixel(col,row, 102, 51, 0);
             }
         }
     }
-
+/******************************************
+*       int drawPipe(SDL_Plotter,int,int)  *
+* description: plots pixels on screen
+* return: int
+* pre: x/y coordinates specified
+* post: returns int
+******************************************/
     void drawPipe(SDL_Plotter & g, int posX,int posY)
     {
         for (int col = posX; col < width + posX; col++)   // goes through all columns
@@ -199,15 +294,5 @@ public:
         }
     }
 
-    void erase(SDL_Plotter & g, int posX, int posY)
-    {
-        for (int col = posX; col < width + posX; col++)
-        {
-            for (int row = posY; row < height + posY; row++)
-            {
-                g.plotPixel(col,row,0,0,0);
-            }
-        }
-    }
 };
 #endif // SDL_PLOTTER_H_
