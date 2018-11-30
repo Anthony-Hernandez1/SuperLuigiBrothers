@@ -23,9 +23,15 @@ public:
     int posY2,
         posX2;
 
+//************************************************************
+// Description: constructor that sets the initial values     *
+// Return: none                                              *
+// Precondition: none                                        *
+// Postcondition: nine                                       *
+//************************************************************
     Enemy()
     {
-         width = 74;
+        width = 74;
         height = 22;
         velX = 0;
         velY = 0;
@@ -36,6 +42,17 @@ public:
         hp = 1;
     }
 
+
+//************************************************************
+// Function: move                                            *
+// Description: This allows the enemy to move by increasing  *
+//          and decreasing the the x position by 5 and using *
+//          that for the volocity of x and y                 *
+// Return: none                                              *
+// Precondition:that the enemy actually needs to move        *
+// Postcondition: the enemy is where it needs  to be         *
+//                                                           *
+//************************************************************
     void move(int xOffset, int yOffset)   // allows you to move
     {
         posY = min(max(posY + yOffset, 0), windowHeight - height-40);
@@ -43,16 +60,38 @@ public:
         velY = posY +5;
     }
 
+//************************************************************
+// Function: moveLeft                                        *
+// Description: moves the enemy to the left                  *
+// Return: none                                              *
+// Precondition:that the left key is pressed                 *
+// Postcondition: the enemy is where it needs to be          *
+//                                                           *
+//************************************************************
     void moveLeft(int xOffset)
     {
         posX-=1;
     }
 
+//************************************************************
+// Function: moveRight                                       *
+// Description: moves the enemy to the right                 *
+// Return: none                                              *
+// Precondition:that the right key is pressed                *
+// Postcondition: the enemy is where it needs to be          *                                                    
+//************************************************************
     void moveRight(int xOffset)
     {
         posX+=1;
     }
-
+    
+//************************************************************
+// Function: gravity                                         *
+// Description: allows gravity to exist for the enemy        *
+// Return: none                                              *
+// Precondition: none, gravity occurs in the game            *
+// Postcondition: none                                       *                                                 
+//************************************************************
     void gravity(int yOffset)
     {
         while (posY!= windowHeight-height-40){
