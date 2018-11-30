@@ -1,5 +1,5 @@
-#ifndef GROUP_PROJECT_MARIO_TOKEN_H
-#define GROUP_PROJECT_MARIO_TOKEN_H
+#ifndef TOKEN_H
+#define TOKEN_H
 #include "SDL_Plotter.h"
 #include <algorithm>
 
@@ -56,4 +56,4 @@ public:
     }
 };
 
-#endif //GROUP_PROJECT_MARIO_TOKEN_H
+#endif //TOKEN_H
