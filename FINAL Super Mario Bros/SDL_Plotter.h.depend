@@ -1,0 +1,191 @@
+# depslib dependency file v1.0
+1543550718 source:h:\compsci_freshman_2018\sdl_plotter.h\main.cpp
+	<iostream>
+	<cmath>
+	<fstream>
+	"SDL_Plotter.h"
+	"Player.h"
+	"floor.h"
+	"Enemy.h"
+	"Score.h"
+	"Token.h"
+	"Level1.h"
+
+1543526369 h:\compsci_freshman_2018\sdl_plotter.h\sdl_plotter.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+	<string.h>
+	<iostream>
+	<string>
+	<string.h>
+	<map>
+
+1543547696 h:\compsci_freshman_2018\sdl_plotter.h\player.h
+	<iostream>
+	<algorithm>
+	"SDL_Plotter.h"
+
+1543550736 h:\compsci_freshman_2018\sdl_plotter.h\floor.h
+	<iostream>
+	<algorithm>
+	"SDL_Plotter.h"
+	<stdlib.h>
+	<time.h>
+
+1542659068 h:\compsci_freshman_2018\sdl_plotter.h\actualfloor.h
+	<iostream>
+	<algorithm>
+	"SDL_Plotter.h"
+
+1543541832 h:\compsci_freshman_2018\sdl_plotter.h\enemy.h
+	<iostream>
+	<algorithm>
+	"SDL_Plotter.h"
+	"Player.h"
+	"Collisions.h"
+
+1543429549 h:\compsci_freshman_2018\sdl_plotter.h\background.h
+	"SDL_Plotter.h"
+	<algorithm>
+	<vector>
+	<fstream>
+
+1543444494 h:\compsci_freshman_2018\sdl_plotter.h\collision.h
+	"Enemy.h"
+	"Player.h"
+
+1543009179 source:h:\compsci_freshman_2018\sdl_plotter.h\collision.cpp
+	"collision.h"
+
+1543275437 h:\compsci_freshman_2018\sdl_plotter.h\sprite.h
+	<fstream>
+	"SDL_Plotter.h"
+	<vector>
+
+1543431588 h:\compsci_freshman_2018\sdl_plotter.h\collisions.h
+	"Enemy.h"
+	"SDL_Plotter.h"
+	"Player.h"
+
+1543434710 h:\compsci_freshman_2018\sdl_plotter.h\pipe.h
+	<iostream>
+	<algorithm>
+	"SDL_Plotter.h"
+
+1543546177 h:\compsci_freshman_2018\sdl_plotter.h\token.h
+	"SDL_Plotter.h"
+	<algorithm>
+
+1543531284 h:\compsci_freshman_2018\sdl_plotter.h\score.h
+	<fstream>
+	<iostream>
+	"Enemy.h"
+
+1543445505 h:\compsci_freshman_2018\sdl_plotter.h\point.h
+
+1543542444 h:\compsci_freshman_2018\sdl_plotter.h\level1.h
+
+1543586162 source:h:\compsci_freshman_2018\matthew's copy\main.cpp
+	<iostream>
+	<cmath>
+	<fstream>
+	"SDL_Plotter.h"
+	"Player.h"
+	"floor.h"
+	"Enemy.h"
+	"Score.h"
+	"Token.h"
+	"secretLevel.h"
+	"Level1.h"
+
+1543526369 h:\compsci_freshman_2018\matthew's copy\sdl_plotter.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+	<string.h>
+	<iostream>
+	<string>
+	<string.h>
+	<map>
+
+1543582481 h:\compsci_freshman_2018\matthew's copy\player.h
+	<iostream>
+	"SDL_Plotter.h"
+
+1543585568 h:\compsci_freshman_2018\matthew's copy\floor.h
+	<iostream>
+	"SDL_Plotter.h"
+	<stdlib.h>
+
+1543582171 h:\compsci_freshman_2018\matthew's copy\enemy.h
+	<iostream>
+	"SDL_Plotter.h"
+	"Player.h"
+
+1543582481 h:\compsci_freshman_2018\matthew's copy\score.h
+	<fstream>
+	<iostream>
+	"Enemy.h"
+
+1543546177 h:\compsci_freshman_2018\matthew's copy\token.h
+	"SDL_Plotter.h"
+	<algorithm>
+
+1543581866 h:\compsci_freshman_2018\matthew's copy\level1.h
+
+1543585720 h:\compsci_freshman_2018\matthew's copy\secretlevel.h
+	<iostream>
+	"SDL_Plotter.h"
+	<stdlib.h>
+
+1543587962 source:h:\compsci_freshman_2018\final super mario bros\main.cpp
+	<iostream>
+	<cmath>
+	<fstream>
+	"SDL_Plotter.h"
+	"Player.h"
+	"floor.h"
+	"Enemy.h"
+	"Score.h"
+	"Token.h"
+	"secretLevel.h"
+	"Level1.h"
+
+1543526369 h:\compsci_freshman_2018\final super mario bros\sdl_plotter.h
+	<SDL2/SDL.h>
+	<SDL2/SDL_mixer.h>
+	<string.h>
+	<iostream>
+	<string>
+	<string.h>
+	<map>
+
+1543588349 h:\compsci_freshman_2018\final super mario bros\player.h
+	<iostream>
+	"SDL_Plotter.h"
+
+1543588041 h:\compsci_freshman_2018\final super mario bros\floor.h
+	<iostream>
+	"SDL_Plotter.h"
+	<stdlib.h>
+
+1543588467 h:\compsci_freshman_2018\final super mario bros\enemy.h
+	<iostream>
+	"SDL_Plotter.h"
+	"Player.h"
+
+1543582481 h:\compsci_freshman_2018\final super mario bros\score.h
+	<fstream>
+	<iostream>
+	"Enemy.h"
+
+1543588502 h:\compsci_freshman_2018\final super mario bros\token.h
+	"SDL_Plotter.h"
+	<algorithm>
+
+1543587937 h:\compsci_freshman_2018\final super mario bros\secretlevel.h
+	<iostream>
+	"SDL_Plotter.h"
+	<stdlib.h>
+
+1543587686 h:\compsci_freshman_2018\final super mario bros\level1.h
+
